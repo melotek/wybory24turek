@@ -30,6 +30,7 @@ export default function Index() {
   const { users } = data;
 
   return (
+    
     <div>
       {users.map((user, index) => (
         <div key={index}>{user.name}</div>
