@@ -9,14 +9,14 @@ import { ZodError, z } from 'zod';
 const SignUpSchema = z.object({
   FirstName: z.string({
     invalid_type_error: 'To nie jest prawidłowe imię',
-  }).min(3, "Imię musi mieć co najmniej 3 znaki").max(20, "Imię nie może mieć więcej niż 20 znaków"),
+  }).min(3, "Imię musi mieć co najmniej 3 znaki").max(20, "Imię nie może mieć więcej niż 20 znaków").regex(/^[A-Za-z]+$/i, "Imię musi składać się z liter"),
   SecondName: z.string({
     invalid_type_error: 'To nie jest prawidłowe nazwisko',
-  }).min(3, "Nazwisko musi mieć co najmniej 3 znaki").max(25, "Nazwisko nie może mieć więcej niż 20 znaków"),
-  Email: z.string().email({message: "To nie jest prawidłowy email"}),
+  }).min(3, "Nazwisko musi mieć co najmniej 3 znaki").max(25, "Nazwisko nie może mieć więcej niż 20 znaków").regex(/^[A-Za-z]+$/i, "Nazwisko musi składać się z liter"),
+  Email: z.string().email({message: "To nie jest prawidłowy email"}).regex(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, "To nie jest prawidłowy email"),
   Category: z.string({
     invalid_type_error: 'To nie jest prawidłowa kategoria',
-  }).min(3, "Kategoria musi mieć co najmniej 3 znaki").max(20, "Kategoria nie może mieć więcej niż 20 znaków"),
+  }).min(3, "Kategoria musi mieć co najmniej 3 znaki").max(20, "Kategoria nie może mieć więcej niż 20 znaków").regex(/^[A-Za-z]+$/i, "Kategoria musi składać się z liter"),
 
   Question: z.string({
     invalid_type_error: 'To nie jest prawidłowe pytanie',
@@ -99,6 +99,9 @@ const AskCandidateForMayorForm = () => {
   const theme = useTheme();
   const onSubmit = (data: IFormInputs) => console.log(data);
 
+
+
+
   const renderFormInput = (key: FormInputKey, field: any) => {
     // Extract error message for the specific field
     const errorMessage = errors[key]?.message;
@@ -107,6 +110,9 @@ const AskCandidateForMayorForm = () => {
       <Box sx={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
         <MaterialTextInput
         type='text'
+        onChange={(e) => {
+          e.target.value.replace(/^\s+/, '');
+        }}
           label={formInputLabels[key]}
           error={Boolean(errors[key])} // Pass a boolean to indicate if this field is in error state
           helperText={errorMessage} // Pass the error message to display below the input

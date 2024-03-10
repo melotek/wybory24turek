@@ -1,9 +1,12 @@
 import AskoCandidateToCityForm from "@/components/forms/askCandidateForCityCouncil";
 import AskCandidateToCountyForm from "@/components/forms/askCandidateForCountyCouncil";
 import AskCandidateForMayorForm from "@/components/forms/askCandidateForMayor";
+import CouncilInstrucitons from "@/components/instructions/cityCouncilForm";
+import CountyInstrucitons from "@/components/instructions/countyCouncilForm";
+import MayorInstructions from "@/components/instructions/mayorForm";
 
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { useTheme, Box, Tab } from "@mui/material";
+import { useTheme, Box, Tab, Paper, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 
 type Props = {};
@@ -21,7 +24,6 @@ const ZadajPytanie = (props: Props) => {
     setValue(newValue);
   };
 
-  console.log();
   const renderForms = () => {
     {
       switch (value) {
@@ -46,6 +48,35 @@ const ZadajPytanie = (props: Props) => {
       }
     }
   };
+  
+  const renderFormInstructions = () => {
+    {
+      switch (value) {
+        case "Pytanie do kandydatów na burmistrza":
+          return (
+            <TabPanel value="Pytanie do kandydatów na burmistrza">
+                            <MayorInstructions />
+
+            </TabPanel>
+          );
+        case "Pytanie do kandydatów na radnych gminy":
+          return (
+            <TabPanel value="Pytanie do kandydatów na radnych gminy">
+                            <CouncilInstrucitons />
+
+            </TabPanel>
+          );
+        case "Pytanie do kandydatów na radnych powiatu":
+          return (
+            <TabPanel value="Pytanie do kandydatów na radnych powiatu">
+                            <CountyInstrucitons />
+
+            </TabPanel>
+          );
+      }
+    }
+
+  }
   useEffect(() => {
     handleChange;
   }, [handleChange]);
@@ -55,13 +86,14 @@ const ZadajPytanie = (props: Props) => {
         marginTop: theme.spacing(22),
         marginLeft: "auto",
         marginRight: "auto",
-        height: "150vh",
         maxWidth: {
           xs: "90%",
           sm: "80%",
         },
       }}
     >
+
+
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -70,7 +102,23 @@ const ZadajPytanie = (props: Props) => {
             ))}
           </TabList>
         </Box>
+        <Box>
+              <Grid container spacing={2}>
+
+              <Grid item xs={12} md={6}>
+        <Paper>
+
         {renderForms()}
+        </Paper>
+        </Grid>
+        <Grid item xs={12}md={6}>
+        <Paper>
+        {renderFormInstructions()}
+        </Paper>
+        </Grid>
+
+        </Grid>
+        </Box>
 
       </TabContext>
     </Box>

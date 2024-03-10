@@ -70,7 +70,7 @@ const Navbar: React.FC<Props> = () => {
       <Link  color={theme.palette.text.primary} key={item} href={"/" + replaceSpacesWithHyphens(item)}
       
       sx={{
-        py: {xs: theme.spacing(4), md: theme.spacing(0)},
+        py: theme.spacing(2),
         display: 'flex', // Use flex display to align items
         alignSelf: 'center', // Center items vertically
         justifyContent: 'center', // Center items horizontally
@@ -81,7 +81,7 @@ const Navbar: React.FC<Props> = () => {
         
       
         <PersonIcon  sx={{ marginRight: theme.spacing(1)}}></PersonIcon>
-        <Typography color={theme.palette.text.primary}  component="span" variant="h6">{item}</Typography>
+        <Typography color={theme.palette.text.primary}  component="span" variant="subtitle2">{item}</Typography>
       </Link><Divider sx={{display: {
         xs: "block",
         md: "none"
@@ -91,10 +91,10 @@ const Navbar: React.FC<Props> = () => {
       : 
       <Link color={theme.palette.text.primary}  key={item} href={"/" + replaceSpacesWithHyphens(item)}
       
-sx={{   textDecoration: 'none',}}
+sx={{   textDecoration: 'none',        py: theme.spacing(2),
+}}
       >
-        <Typography  variant="h6"       sx={{
-        py: theme.spacing(4),
+        <Typography  variant="subtitle2"       sx={{
      
 
         display: 'flex', // Use flex display to align items
@@ -112,7 +112,7 @@ sx={{   textDecoration: 'none',}}
   };
 
   return (
-    <AppBar component="nav" position="fixed" sx={{ padding: "20px 0px" }}>
+    <AppBar component="nav" position="fixed" sx={{ padding: "0px 0px" }}>
       <Toolbar
       sx={{
         justifyContent: "space-between",

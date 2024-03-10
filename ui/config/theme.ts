@@ -22,6 +22,9 @@ const theme = createTheme({
     primary: {
       main: 'rgb(206,2,2)',
     },
+    secondary: {
+      main: 'rgb(17, 24, 79)'
+    }
   },
   typography: {
     fontFamily: notoSans.style.fontFamily,
@@ -31,7 +34,6 @@ const theme = createTheme({
     MuiLink: {
       styleOverrides: {
         root: {
-            color:  'rgb(17, 24, 39)',
 
           textDecoration: "none",
           "&:hover": {
