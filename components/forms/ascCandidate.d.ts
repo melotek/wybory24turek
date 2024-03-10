@@ -1,25 +1,18 @@
 // types.ts
-export interface IFormInputsBase {
+export interface IFormInputs {
     FirstName: string;
     SecondName: string;
     Email: string;
+    Constituency?: number; // Można użyć "?" dla pól opcjonalnych
     Category: string;
     Question: string;
   }
-  
-  export interface ICityCouncilFormInputs extends IFormInputsBase {}
-  
-  export interface ICountyCouncilFormInputs extends IFormInputsBase {
-    Constituency: number; // Dla Rady Powiatu, pole Okręg jest wymagane
-  }
-  
-  export interface IMayorFormInputs extends IFormInputsBase {}
   
   export interface ISelectOption {
     value: number;
     label: string;
   }
   
-  export type TFormChildrenProps<T> = {
-    control: Control<T>;
+  export type TFormChildrenProps = {
+    control: Control<IFormInputs>;
   };

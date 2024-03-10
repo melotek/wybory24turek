@@ -4,6 +4,7 @@ import { Box, Button, useTheme } from '@mui/material';
 import MaterialTextInput from '../shared/textField';
 import SelectOptions from '../shared/selectOptions'; // Ensure this import path is correct
 import { selectOptions } from './askCondidate.Core';
+import QuestionsAPI from '@/actions/questionsApi';
 
 // Define the keys as simple strings to prevent TypeScript issues.
 enum FormInputKey  {
@@ -53,7 +54,11 @@ const AskoCandidateToCityForm = () => {
   });
 
   const theme = useTheme();
-  const onSubmit = (data: IFormInputs) => console.log(data);
+  const onSubmit = async (data: IFormInputs) => {
+    
+  await  QuestionsAPI.createCityCouncil(data)
+    
+    console.log(data);}
 
   const renderFormInput = (key: FormInputKey, field: any) => {
     switch (key) {
