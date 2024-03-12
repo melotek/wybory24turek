@@ -59,56 +59,60 @@ const Navbar: React.FC<Props> = () => {
 
   
   const ListElement = ({ item }: MyLinkProps) => {
-    return (
-      <>
-    { item ==="Zaloguj" ?
-    <>
-    <Divider
-    
-    sx={{display: {xs: "block", md: "none"}}}
-    ></Divider>
-      <Link  color={theme.palette.text.primary} key={item} href={"/" + replaceSpacesWithHyphens(item)}
-      
-      sx={{
-        py: theme.spacing(2),
-        display: 'flex', // Use flex display to align items
-        alignSelf: 'center', // Center items vertically
-        justifyContent: 'center', // Center items horizontally
-        textDecoration: 'none'
-
-      }}
-      >
-        
-      
-        <PersonIcon  sx={{ marginRight: theme.spacing(1)}}></PersonIcon>
-        <Typography color={theme.palette.text.primary}  component="span" variant="subtitle2">{item}</Typography>
-      </Link><Divider sx={{display: {
-        xs: "block",
-        md: "none"
-      
-      }}}></Divider>
-      </>
-      : 
-      <Link color={theme.palette.text.primary}  key={item} href={"/" + replaceSpacesWithHyphens(item)}
-      
-sx={{   textDecoration: 'none',        py: theme.spacing(2),
-}}
-      >
-        <Typography  variant="subtitle2"       sx={{
+    function populateQuestionsUrls() {
      
-
-        display: 'flex', // Use flex display to align items
-        alignItems: 'center', // Center items vertically
-        justifyContent: 'center', // Center items horizontally
-        textDecoration: 'none'
-      }}>
-   {item}
-        </Typography>
-   
-    </Link>
+      if (item === "Zadaj Pytanie") {
+        return item + "/wybory-burmistrz";
+    } 
+    return item;
+  }
+const populateUrls = populateQuestionsUrls()
+    if (item === "Zaloguj") {
+    return  <>
+      <Divider
+    
+      sx={{display: {xs: "block", md: "none"}}}
+      ></Divider>
+        <Link  color={theme.palette.text.primary} key={item} href={"/" + replaceSpacesWithHyphens(populateUrls)}
+        
+        sx={{
+          py: theme.spacing(2),
+          display: 'flex', // Use flex display to align items
+          alignSelf: 'center', // Center items vertically
+          justifyContent: 'center', // Center items horizontally
+          textDecoration: 'none'
+  
+        }}
+        >
+          
+        
+          <PersonIcon  sx={{ marginRight: theme.spacing(1)}}></PersonIcon>
+          <Typography color={theme.palette.text.primary}  component="span" variant="subtitle2">{item}</Typography>
+        </Link><Divider sx={{display: {
+          xs: "block",
+          md: "none"
+        
+        }}}></Divider>
+        </>
+    } else {
+     return <Link color={theme.palette.text.primary}  key={item} href={"/" + replaceSpacesWithHyphens(populateUrls)}
+      
+      sx={{   textDecoration: 'none',        py: theme.spacing(2),
+      }}
+            >
+              <Typography  variant="subtitle2"       sx={{
+           
+      
+              display: 'flex', // Use flex display to align items
+              alignItems: 'center', // Center items vertically
+              justifyContent: 'center', // Center items horizontally
+              textDecoration: 'none'
+            }}>
+         {item}
+              </Typography>
+         
+          </Link>
     }
-      </>
-    );
   };
 
   return (

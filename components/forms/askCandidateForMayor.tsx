@@ -97,7 +97,9 @@ const AskCandidateForMayorForm = () => {
     },});
 
   const theme = useTheme();
-  const onSubmit = (data: IFormInputs) => console.log(data);
+  const onSubmit = (data: IFormInputs) => {
+    
+  };
 
 
 

@@ -56,7 +56,7 @@ const AskoCandidateToCityForm = () => {
   const theme = useTheme();
   const onSubmit = async (data: IFormInputs) => {
     
-  await  QuestionsAPI.createCityCouncil(data)
+  await  QuestionsAPI.createCityCouncilQuestion(data)
     
     console.log(data);}
 

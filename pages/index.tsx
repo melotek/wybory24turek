@@ -1,3 +1,4 @@
+import HomeContent from "@/components/_pages/home/content";
 import useSWR from "swr";
 
 const fetcher = (query: string) =>
@@ -32,6 +33,7 @@ export default function Index() {
   return (
     
     <div>
+      <HomeContent/>
       {users.map((user, index) => (
         <div key={index}>{user.name}</div>
       ))}
