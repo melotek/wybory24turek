@@ -2,10 +2,10 @@ import React from 'react'
 
 type Props = {}
 
-const InstructionCategory = (props: Props) => {
+const Instructioncategory = (props: Props) => {
   return (
-    <div>InstructionCategory</div>
+    <div>Instructioncategory</div>
   )
 }
 
-export default InstructionCategory
+export default Instructioncategory

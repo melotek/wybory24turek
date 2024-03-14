@@ -7,12 +7,12 @@ import { selectOptions } from './askCondidate.Core';
 
 // Define the keys as simple strings to prevent TypeScript issues.
 enum FormInputKey  {
-  FirstName =  'FirstName',
-  SecondName = 'SecondName',
-  Email = 'Email',
-  Constituency= 'Constituency',
-  Category = 'Category',
-  Question=  'Question',
+  firstname =  'firstname',
+  secondname = 'secondname',
+  email = 'email',
+  district= 'district',
+  category = 'category',
+  question=  'question',
   // Preference: 'Preference',
 }
 
@@ -20,34 +20,34 @@ enum FormInputKey  {
 
 
 const formInputLabels = {
-  FirstName: 'Imię',
-  SecondName: 'Nazwisko',
-  Email: 'Email',
-  Constituency: 'Okręg',
-  Category: 'Kategoria',
-  Question: 'Pytanie',
+  firstname: 'Imię',
+  secondname: 'Nazwisko',
+  email: 'Email',
+  district: 'Okręg',
+  category: 'Kategoria',
+  question: 'Pytanie',
   // Preference: 'Preferencja',
 };
 
 interface IFormInputs {
-  FirstName: string;
-  SecondName: string;
-  Email: string;
-  Constituency: number | undefined;
-  Category: string;
-  Question: string;
+  firstname: string;
+  secondname: string;
+  email: string;
+  district: number | undefined;
+  category: string;
+  question: string;
   // Preference: number | '';
 }
 
 const AskoCandidateForm = () => {
   const { handleSubmit, control } = useForm<IFormInputs>({
     defaultValues: {
-      FirstName: '',
-      SecondName: '',
-      Email: '',
-      Constituency: undefined,
-      Category: '',
-      Question: '',
+      firstname: '',
+      secondname: '',
+      email: '',
+      district: undefined,
+      category: '',
+      question: '',
       // Preference: '',
     },
   });
@@ -57,7 +57,7 @@ const AskoCandidateForm = () => {
 
   const renderFormInput = (key: FormInputKey, field: any) => {
     switch (key) {
-      case 'Constituency':
+      case 'district':
       // case 'Preference':
         return (
           <Box sx={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>

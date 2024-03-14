@@ -59,14 +59,14 @@ const Navbar: React.FC<Props> = () => {
 
   
   const ListElement = ({ item }: MyLinkProps) => {
-    function populateQuestionsUrls() {
+    function populatequestionsUrls() {
      
       if (item === "Zadaj Pytanie") {
         return item + "/wybory-burmistrz";
     } 
     return item;
   }
-const populateUrls = populateQuestionsUrls()
+const populateUrls = populatequestionsUrls()
     if (item === "Zaloguj") {
     return  <>
       <Divider

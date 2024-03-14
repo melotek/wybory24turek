@@ -1,13 +1,13 @@
 export interface IBaseFormInputs {
-    FirstName: string;
-    SecondName: string;
+    firstname: string;
+    secondname: string;
     Email: string;
-    Question: string;
-    Category: string;
+    question: string;
+    category: string;
   }
 
   export const selectOptions = {
-    Constituency: {
+    district: {
         city: Array.from({ length: 4 }, (_, i) => ({ value: i + 1, label: `Okręg ${i + 1}` })),
         county: Array.from({ length: 5 }, (_, i) => ({ value: i + 1, label: `Okręg ${i + 1}` })),
     } 

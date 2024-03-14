@@ -5,20 +5,21 @@ import MaterialTextInput from '../shared/textField';
 import SelectOptions from '../shared/selectOptions'; // Ensure this import path is correct
 import { selectOptions } from './askCondidate.Core';
 import { ZodError, z } from 'zod';
+import questionsAPI from '@/actions/questionsApi';
 
 const SignUpSchema = z.object({
-  FirstName: z.string({
+  firstname: z.string({
     invalid_type_error: 'To nie jest prawidłowe imię',
   }).min(3, "Imię musi mieć co najmniej 3 znaki").max(20, "Imię nie może mieć więcej niż 20 znaków").regex(/^[A-Za-z]+$/i, "Imię musi składać się z liter"),
-  SecondName: z.string({
+  secondname: z.string({
     invalid_type_error: 'To nie jest prawidłowe nazwisko',
   }).min(3, "Nazwisko musi mieć co najmniej 3 znaki").max(25, "Nazwisko nie może mieć więcej niż 20 znaków").regex(/^[A-Za-z]+$/i, "Nazwisko musi składać się z liter"),
-  Email: z.string().email({message: "To nie jest prawidłowy email"}).regex(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, "To nie jest prawidłowy email"),
-  Category: z.string({
+  email: z.string().email({message: "To nie jest prawidłowy email"}).regex(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, "To nie jest prawidłowy email"),
+  category: z.string({
     invalid_type_error: 'To nie jest prawidłowa kategoria',
   }).min(3, "Kategoria musi mieć co najmniej 3 znaki").max(20, "Kategoria nie może mieć więcej niż 20 znaków").regex(/^[A-Za-z]+$/i, "Kategoria musi składać się z liter"),
 
-  Question: z.string({
+  question: z.string({
     invalid_type_error: 'To nie jest prawidłowe pytanie',
   }).min(3, "Pytanie musi mieć co najmniej 3 znaki").max(800, "Pytanie nie może mieć więcej niż 800 znaków"),
   
@@ -28,12 +29,12 @@ const SignUpSchema = z.object({
 type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 // Define the keys as simple strings to prevent TypeScript issues.
 enum FormInputKey  {
-  FirstName =  'FirstName',
-  SecondName = 'SecondName',
-  Email = 'Email',
-//   Constituency= 'Constituency',
-  Category = 'Category',
-  Question=  'Question',
+  firstname =  'firstname',
+  secondname = 'secondname',
+  email = 'email',
+//   district= 'district',
+  category = 'category',
+  question=  'question',
   // Preference: 'Preference',
 }
 
@@ -41,21 +42,21 @@ enum FormInputKey  {
 
 
 const formInputLabels = {
-  FirstName: 'Imię',
-  SecondName: 'Nazwisko',
-  Email: 'Email',
-//   Constituency: 'Okręg',
-  Category: 'Kategoria',
-  Question: 'Pytanie',
+  firstname: 'Imię',
+  secondname: 'Nazwisko',
+  email: 'Email',
+//   district: 'Okręg',
+  category: 'Kategoria',
+  question: 'Pytanie',
   // Preference: 'Preferencja',
 };
 
 export interface IFormInputs {
-  FirstName: string;
-  SecondName: string;
-  Email: string;
-  Category: string;
-  Question: string;
+  firstname: string;
+  secondname: string;
+  email: string;
+  category: string;
+  question: string;
   // Preference: number | '';
 }
 const ErrorResolver = (error: ZodError<any>): Record<string, FieldError> => {
@@ -75,11 +76,11 @@ const AskCandidateForMayorForm = () => {
   const { handleSubmit, control, formState: { errors }, setError } = 
   useForm<SignUpSchemaType>({
     defaultValues: {
-      FirstName: '',
-      SecondName: '',
-      Email: '',
-      Category: '',
-      Question: '',
+      firstname: '',
+      secondname: '',
+      email: '',
+      category: '',
+      question: '',
       // Preference: '',
     },
     resolver: async (data) => {
@@ -97,8 +98,8 @@ const AskCandidateForMayorForm = () => {
     },});
 
   const theme = useTheme();
-  const onSubmit = (data: IFormInputs) => {
-    
+  const onSubmit = async (data: IFormInputs) => {
+  await questionsAPI.createMayorquestion(data)
   };
 
 

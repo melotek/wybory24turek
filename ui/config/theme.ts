@@ -32,6 +32,13 @@ const theme = createTheme({
   },
   // shadows: defaultShadows.map(() => 'none') as Shadows,
   components: {
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: 'rgb(17, 24, 39)'
+        }
+      }
+    },
     MuiLink: {
       styleOverrides: {
         root: {

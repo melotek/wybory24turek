@@ -1,11 +1,11 @@
 // types.ts
 export interface IFormInputs {
-    FirstName: string;
-    SecondName: string;
+    firstname: string;
+    secondname: string;
     Email: string;
-    Constituency?: number; // Można użyć "?" dla pól opcjonalnych
-    Category: string;
-    Question: string;
+    district?: number; // Można użyć "?" dla pól opcjonalnych
+    category: string;
+    question: string;
   }
   
   export interface ISelectOption {

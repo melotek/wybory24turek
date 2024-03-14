@@ -1,38 +1,75 @@
 import client from "./client"
 import { defineCancelApiObject } from "./utills"
 
-const QuestionsAPI = {
-    createCityCouncilQuestion: async function (question: any, cancel = false) {
-      const response =   await client(false).request({
+
+
+const questionsAPI = {
+    createCityCouncilquestion: async function (question: any, cancel = false) {
+      
+      const formData = new FormData();
+      await formData.append('firstname', question.firstname);
+      formData.append('secondname', question.secondname);
+      formData.append('email', question.email);
+      formData.append('question', question.question);
+      formData.append('category', question.category);
+      formData.append('district', question.district);
+      formData.append('recipient', "CITY_COUNCIL");
+
+      const response = await client(false).request({
           url: `/api/v1/questions/city-council`,
           method: "POST",
-          data: question,
-          signal: cancel ? cancelApiObject[this.createCityCouncilQuestion.name].handleRequestCancellation().signal : undefined,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: formData,
+          signal: cancel ? cancelApiObject[this.createCityCouncilquestion.name].handleRequestCancellation().signal : undefined,
         })
         return response
 
       },
-      createMayorQuestion: async function (question: any, cancel = false) {
+      createMayorquestion: async function (question: any, cancel = false) {
+        const formData  = new FormData();
+        await formData.append('firstname', question.firstname);
+        formData.append('secondname', question.secondname);
+        formData.append('email', question.email);
+        formData.append('question', question.question);
+        formData.append('category', question.category);
+        formData.append('recipient', "MAYOR");
         const response =   await client(false).request({
             url: `/api/v1/questions/mayor`,
             method: "POST",
-            data: question,
-            signal: cancel ? cancelApiObject[this.createMayorQuestion.name].handleRequestCancellation().signal : undefined,
+            data: formData,
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            // signal: cancel ? cancelApiObject[this.createMayorquestion.name].handleRequestCancellation().signal : undefined,
           })
           return response
   
         },
-        createCountyCouncilQuestion: async function (question: any, cancel = false) {
+        createCountyCouncilquestion: async function (question: any, cancel = false) {
+          const formData  = new FormData();
+          await formData.append('firstname', question.firstname);
+          formData.append('secondname', question.secondname);
+          formData.append('email', question.email);
+          formData.append('question', question.question);
+          formData.append('category', question.category);
+          formData.append('district', question.district);
+
+          formData.append('recipient', "COUNTY");
             const response =   await client(false).request({
                 url: `/api/v1/questions/county-council`,
                 method: "POST",
                 data: question,
-                signal: cancel ? cancelApiObject[this.createCountyCouncilQuestion.name].handleRequestCancellation().signal : undefined,
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                signal: cancel ? cancelApiObject[this.createCountyCouncilquestion.name].handleRequestCancellation().signal : undefined,
                 })
                 return response
         
             }
 
 }
-const cancelApiObject = defineCancelApiObject(QuestionsAPI)
-export default QuestionsAPI
+const cancelApiObject = defineCancelApiObject(questionsAPI)
+export default questionsAPI
