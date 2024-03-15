@@ -21,8 +21,9 @@ export default async function handler(
   req: RequestBody,
   res: NextApiResponse<ResponseData>
 ) {
+  await limiter.check(res, 10, "CACHE_TOKEN");
+
   try {
-    await limiter.check(res, 10, "CACHE_TOKEN");
     await dbConnect();
 
     if (req.method !== 'POST') {

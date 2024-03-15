@@ -8,28 +8,9 @@ import { ZodError, z } from 'zod';
 import questionsAPI from '@/actions/questionsApi';
 import Error from 'next/error';
 import { AxiosResponse } from 'axios';
+import { ErrorResolver, ValidationMayorFrom, validationMayorFromSchema } from '@/helpers/formValidations';
 
-const SignUpSchema = z.object({
-  firstname: z.string({
-    invalid_type_error: 'To nie jest prawidłowe imię',
-  }).min(3, "Imię musi mieć co najmniej 3 znaki").max(20, "Imię nie może mieć więcej niż 20 znaków").regex(/^[A-Za-z]+$/i, "Imię musi składać się z liter"),
-  secondname: z.string({
-    invalid_type_error: 'To nie jest prawidłowe nazwisko',
-  }).min(3, "Nazwisko musi mieć co najmniej 3 znaki").max(25, "Nazwisko nie może mieć więcej niż 20 znaków").regex(/^[A-Za-z]+$/i, "Nazwisko musi składać się z liter"),
-  email: z.string().email({message: "To nie jest prawidłowy email"}).regex(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, "To nie jest prawidłowy email"),
-  category: z.string({
-    invalid_type_error: 'To nie jest prawidłowa kategoria',
-  }).min(3, "Kategoria musi mieć co najmniej 3 znaki").max(20, "Kategoria nie może mieć więcej niż 20 znaków").regex(/^[A-Za-z]+$/i, "Kategoria musi składać się z liter"),
 
-  question: z.string({
-    invalid_type_error: 'To nie jest prawidłowe pytanie',
-  }).min(3, "Pytanie musi mieć co najmniej 3 znaki").max(800, "Pytanie nie może mieć więcej niż 800 znaków"),
-  
-  // Preference: z.number().optional(),
-});
-
-type SignUpSchemaType = z.infer<typeof SignUpSchema>;
-// Define the keys as simple strings to prevent TypeScript issues.
 enum FormInputKey  {
   firstname =  'firstname',
   secondname = 'secondname',
@@ -56,34 +37,17 @@ const formInputLabels = {
 export interface IFormInputs {
   firstname: string;
   secondname: string;
-  email: string;
-  category: string;
   question: string;
+  email?: string;
+  category?: string;
   // Preference: number | '';
 }
-const mockData = {
-  firstname: "lukas",
-  secondname: "dasdas",
-  email:"dsada@dsad.pl",
-  category: "dsafas",
-  question: "dsacccccccccccccc" 
-}
-const ErrorResolver = (error: ZodError<any>): Record<string, FieldError> => {
-  const formErrors: Record<string, FieldError> = {};
-  error.errors.forEach((err) => {
-    // You can customize the message or error type further based on your needs
-    const message = err.message || "Invalid value";
-    if (!formErrors[err.path[0]]) { // Avoid overwriting errors
-      formErrors[err.path[0]] = { type: err.code, message };
-    }
-  });
-  return formErrors;
-};
+
 
 const AskCandidateForMayorForm = () => {
   const [apiResponse, setApiResponse] = useState<AxiosResponse<any, any> | null>(null)
   const { handleSubmit, control, formState: { errors }, setError } = 
-  useForm<SignUpSchemaType>({
+  useForm<ValidationMayorFrom>({
     defaultValues: {
       firstname: '',
       secondname: '',
@@ -94,7 +58,7 @@ const AskCandidateForMayorForm = () => {
     },
     resolver: async (data) => {
       try {
-        SignUpSchema.parse(data);
+        validationMayorFromSchema.parse(data);
         return { values: data, errors: {} }; // No errors
       } catch (error) {
         if (error instanceof ZodError) {

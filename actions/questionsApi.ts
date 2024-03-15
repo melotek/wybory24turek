@@ -58,7 +58,7 @@ const questionsAPI = {
             formDataCountyCouncil.append('question', question.question);
             formDataCountyCouncil.append('category', question.category);
             formDataCountyCouncil.append('district', question.district);
-            formDataCountyCouncil.append('recipient', "COUNTY");
+            formDataCountyCouncil.append('recipient', "COUNTY_COUNCIL");
             formDataCountyCouncil.append('status', "draft");
             
             

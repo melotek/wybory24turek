@@ -28,7 +28,7 @@ export interface IquestionForms extends IAuthor extends Document{
   
   question: string;
   category: string;
-  recipient: "MAYOR" | "CITY_COUNCIL" | "COUNTY"; // Additional field for questions to the city council or county
+  recipient: "MAYOR" | "CITY_COUNCIL" | "COUNTY_COUNCIL"; // Additional field for questions to the city council or county
   
   district?: string;
   status?:  "draft" | "published" | "rejected";

@@ -23,9 +23,9 @@ export const questionFormSchema = new Schema<IquestionForms>({
         type: String,
         required: true,
     },
-    recipient: {type: String, enum: ["MAYOR", "CITY_COUNCIL", "COUNTY"], required: true},
+    recipient: {type: String, enum: ["MAYOR", "CITY_COUNCIL", "COUNTY_COUNCIL"], required: true},
     district: {
-        type: Number,
+        type: String,
         required: false,
     },
   

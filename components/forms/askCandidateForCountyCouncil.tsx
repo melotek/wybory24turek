@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Box, Button, useTheme } from '@mui/material';
+import { Box, Button, NoSsr, useTheme } from '@mui/material';
 import MaterialTextInput from '../shared/textField';
 import SelectOptions from '../shared/selectOptions'; // Ensure this import path is correct
 import { selectOptions } from './askCondidate.Core';
 import questionsAPI from '@/actions/questionsApi';
+import { AxiosResponse } from 'axios';
+import { ErrorResolver, validationCityCouncilFromSchema } from '@/helpers/formValidations';
+import { ZodError } from 'zod';
 
 // Define the keys as simple strings to prevent TypeScript issues.
 enum FormInputKey  {
@@ -40,7 +43,8 @@ interface IFormInputs {
   // Preference: number | '';
 }
 const AskCandidateToCountyForm = () => {
-  const { handleSubmit, control } = useForm<IFormInputs>({
+  const [apiResponse, setApiResponse] = useState<AxiosResponse<any, any> | null>(null)
+  const { handleSubmit, control, formState: { errors } } = useForm<IFormInputs>({
     defaultValues: {
       firstname: '',
       secondname: '',
@@ -50,27 +54,59 @@ const AskCandidateToCountyForm = () => {
       question: '',
       // Preference: '',
     },
+    resolver: async (data) => {
+      try {
+        validationCityCouncilFromSchema.parse(data);
+        return { values: data, errors: {} }; // No errors
+      } catch (error) {
+        if (error instanceof ZodError) {
+          return { values: {}, errors: ErrorResolver(error) };
+        }
+        // For unexpected errors
+        console.error(error);
+        return { values: {}, errors: {} }; // You might want to handle this case differently
+      }
+    },
   });
 
   const theme = useTheme();
   const onSubmit = async (data: IFormInputs) => {
-    await questionsAPI.createCountyCouncilquestion(data)
+    try {
+      
+      const response =await questionsAPI.createCountyCouncilquestion(data)
+      setApiResponse(response)
+    } catch (error) {
+      console.log(error)
+    }
     };
   
-  
+    useEffect(() => {
+      onSubmit
+     }, [onSubmit])
   const renderFormInput = (key: FormInputKey, field: any) => {
+    const errorMessage = errors[key]?.message;
+    const ref = useRef<HTMLInputElement | null>(null);
+    const selectRef = useRef<HTMLSelectElement | null>(null);
     switch (key) {
       case 'district':
       // case 'Preference':
         return (
           <Box sx={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
-            <SelectOptions variant="outlined" myLabel={formInputLabels[key]} selectOptions={selectOptions[key].county} {...field} />
+              <NoSsr>
+            <SelectOptions
+            ref={selectRef}
+            variant="outlined" myLabel={formInputLabels[key]} selectOptions={selectOptions[key].county} {...field}
+              error={Boolean(errors[key])} // Pass a boolean to indicate if this field is in error state
+              helperte={errorMessage} /></NoSsr>
           </Box>
         );
       default:
         return (
           <Box sx={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
-            <MaterialTextInput label={formInputLabels[key]} {...field} />
+            <MaterialTextInput label={formInputLabels[key]} {...field}   error={Boolean(errors[key])} // Pass a boolean to indicate if this field is in error state
+                  ref={ref}
+
+          helperte={errorMessage}/>
           </Box>
         );
     }
