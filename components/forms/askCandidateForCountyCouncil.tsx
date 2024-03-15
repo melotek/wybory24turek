@@ -6,7 +6,7 @@ import SelectOptions from '../shared/selectOptions'; // Ensure this import path 
 import { selectOptions } from './askCondidate.Core';
 import questionsAPI from '@/actions/questionsApi';
 import { AxiosResponse } from 'axios';
-import { ErrorResolver, validationCityCouncilFromSchema } from '@/helpers/formValidations';
+import { ErrorResolver, validationCountyCouncilFromSchema } from '@/helpers/formValidations';
 import { ZodError } from 'zod';
 
 // Define the keys as simple strings to prevent TypeScript issues.
@@ -56,7 +56,7 @@ const AskCandidateToCountyForm = () => {
     },
     resolver: async (data) => {
       try {
-        validationCityCouncilFromSchema.parse(data);
+        validationCountyCouncilFromSchema.parse(data);
         return { values: data, errors: {} }; // No errors
       } catch (error) {
         if (error instanceof ZodError) {

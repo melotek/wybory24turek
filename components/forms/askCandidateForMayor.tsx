@@ -18,20 +18,16 @@ enum FormInputKey  {
 //   district= 'district',
   category = 'category',
   question=  'question',
-  // Preference: 'Preference',
 }
 
-// type FormInputKey = typeof FormInputKey[keyof typeof FormInputKey];
 
 
 const formInputLabels = {
   firstname: 'Imię',
   secondname: 'Nazwisko',
   email: 'Email',
-//   district: 'Okręg',
   category: 'Kategoria',
   question: 'Pytanie',
-  // Preference: 'Preferencja',
 };
 
 export interface IFormInputs {
@@ -46,7 +42,7 @@ export interface IFormInputs {
 
 const AskCandidateForMayorForm = () => {
   const [apiResponse, setApiResponse] = useState<AxiosResponse<any, any> | null>(null)
-  const { handleSubmit, control, formState: { errors }, setError } = 
+  const { handleSubmit, control, formState: { errors } } = 
   useForm<ValidationMayorFrom>({
     defaultValues: {
       firstname: '',

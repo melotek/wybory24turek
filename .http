@@ -1,11 +1,10 @@
 POST http://localhost:3000/api/v1/questions/city-council HTTP/1.1
 content-type: application/json
 
-{
-    "firstname": "dsadas",
+data: 
+   { "firstname": "dsadas",
       "secondname": "dsadas",
       "email": "dsadas@fdasf.pl",
-      "district": 1,
+      "district": "1",
       "category": "dsadas",
-      "question": "dsadas",
-}
+      "question": "dsadas",}
