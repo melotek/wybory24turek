@@ -1,11 +1,23 @@
 import { Noto_Sans } from 'next/font/google';
-import { createTheme, ThemeOptions, Shadows } from '@mui/material/styles';
+import { createTheme, TypeText } from '@mui/material/styles';
+import { ButtonProps, ButtonBaseProps } from '@mui/material';
 
 // create a temporary theme to get the default options
 const defaultTheme = createTheme();
 
 // get the default `shadows` object
 // const defaultShadows: ThemeOptions['shadows'] = [...defaultTheme.shadows];
+type MyCustomTextColor = {
+  darker: string;
+} & TypeText
+
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    rounded: true;
+  }
+ }
+
+
 
 export const notoSans = Noto_Sans({
   weight: ['300', '400', '500', '700'],
@@ -17,14 +29,15 @@ export const notoSans = Noto_Sans({
 const theme = createTheme({
   palette: {
     text: {
-      primary: 'rgb(17, 24, 39)',
+      primary: 'rgb(91,105,129)',
       secondary: 'rgb(235, 235, 235)',
-    },
+      darker: "rgb(34,45,102)"
+    } as MyCustomTextColor,
     primary: {
-      main: 'rgb(206,2,2)',
+      main: 'rgb(34,45,102)',
     },
     secondary: {
-      main: 'rgb(17, 24, 79)'
+      main: 'rgb(202,31,64)'
     }
   },
   typography: {
@@ -65,6 +78,18 @@ const theme = createTheme({
         }
       
     },
+    },
+    MuiButton: {
+      
+      styleOverrides: {
+        root: {
+          contained: {
+            large: {
+              borderRadius: 100
+            }
+          }
+        }
+     }
     }
   }
 });

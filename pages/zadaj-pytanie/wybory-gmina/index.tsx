@@ -31,6 +31,7 @@ const ZadajPytanie = (props: Props) => {
   const handleChange = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
       // Ustalanie indeksu na podstawie wartości newValue
+      console.log(event)
       const formIndex = forms.findIndex((form) => form === newValue);
 
       // Ustawianie pathname na podstawie znalezionego indeksu

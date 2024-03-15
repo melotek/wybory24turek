@@ -116,10 +116,10 @@ const AskoCandidateToCityForm = () => {
           render={({ field }) => renderFormInput(key as FormInputKey, field)}
         />
       ))}
-      <Button variant="contained" type="submit" >
+      <MyButton variant="contained" type="submit" color="secondary" size="large" isRounded={true}>
 
-        Wysyłam pytanie
-      </Button>
+Wysyłam pytanie
+</MyButton>
 
     </form>
   );

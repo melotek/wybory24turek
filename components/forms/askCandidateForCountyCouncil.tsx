@@ -8,6 +8,7 @@ import questionsAPI from '@/actions/questionsApi';
 import { AxiosResponse } from 'axios';
 import { ErrorResolver, validationCountyCouncilFromSchema } from '@/helpers/formValidations';
 import { ZodError } from 'zod';
+import MyButton from '../shared/buttons';
 
 // Define the keys as simple strings to prevent TypeScript issues.
 enum FormInputKey  {
@@ -123,10 +124,10 @@ const AskCandidateToCountyForm = () => {
           render={({ field }) => renderFormInput(key as FormInputKey, field)}
         />
       ))}
-      <Button variant="contained" type="submit" >
+      <MyButton variant="contained" type="submit" color="secondary" size="large" isRounded={true}>
 
-        Wysyłam pytanie
-      </Button>
+Wysyłam pytanie
+</MyButton>
 
     </form>
   );

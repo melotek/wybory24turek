@@ -9,6 +9,7 @@ import questionsAPI from '@/actions/questionsApi';
 import Error from 'next/error';
 import { AxiosResponse } from 'axios';
 import { ErrorResolver, ValidationMayorFrom, validationMayorFromSchema } from '@/helpers/formValidations';
+import MyButton from '../shared/buttons';
 
 
 enum FormInputKey  {
@@ -74,7 +75,6 @@ const AskCandidateForMayorForm = () => {
      const  response =  await questionsAPI.createMayorquestion(data)
 
        setApiResponse(response)
-     console.log(response)
     } catch (error) {
       console.log(error)
     }
@@ -116,10 +116,10 @@ const AskCandidateForMayorForm = () => {
           render={({ field }) => renderFormInput(key as FormInputKey, field)}
         />
       ))}
-      <Button variant="contained" type="submit" >
+      <MyButton variant="contained" type="submit" color="secondary" size="large" isRounded={true}>
 
         Wysyłam pytanie
-      </Button>
+      </MyButton>
 
     </form>
   );
