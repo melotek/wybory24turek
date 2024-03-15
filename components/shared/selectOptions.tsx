@@ -18,6 +18,8 @@ const SelectOptions = ({selectOptions, myLabel, ...rest}: SelectOptionProps) => 
             <InputLabel id={myLabel + "-label"} >{myLabel}</InputLabel>
 
         <Select 
+    
+    key={myLabel}
 label={myLabel}
 MenuProps={{
     anchorOrigin: {

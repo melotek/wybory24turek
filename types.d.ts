@@ -1,4 +1,4 @@
-// User.ts
+import {Document} from "mongoose"
 export interface User {
     firstname: string;
     username: string;
@@ -23,13 +23,16 @@ export interface IAuthor {
   email?: string;
 
 }
-type IRecipient  = "MAYOR" | "CITY_COUNCIL" | "COUNTY";
-export interface IquestionForm<IRecipient> extends IAuthor {
+
+export interface IquestionForms extends IAuthor extends Document{
   
   question: string;
   category: string;
-  recipient: IRecipient; // Additional field for questions to the city council or county
-  district?: string; // Dodatkowe pole dla pytań do rady gminy lub powiatu
+  recipient: "MAYOR" | "CITY_COUNCIL" | "COUNTY"; // Additional field for questions to the city council or county
+  
+  district?: string;
+  status?:  "draft" | "published" | "rejected";
+  // Dodatkowe pole dla pytań do rady gminy lub powiatu
 };
 
 export interface IRating {

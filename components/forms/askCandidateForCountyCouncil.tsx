@@ -10,7 +10,7 @@ import questionsAPI from '@/actions/questionsApi';
 enum FormInputKey  {
   firstname =  'firstname',
   secondname = 'secondname',
-  Email = 'email',
+  email = 'email',
   district= 'district',
   category = 'category',
   question=  'question',

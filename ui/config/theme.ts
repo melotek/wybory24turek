@@ -56,6 +56,15 @@ const theme = createTheme({
           backgroundColor: "#fff"
         },
       }
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: 'rgb(17, 24, 39)',
+      
+        }
+      
+    },
     }
   }
 });

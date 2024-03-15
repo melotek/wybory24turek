@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import TextField, {TextFieldProps} from '@mui/material/TextField';
 
+type Ref = HTMLInputElement;
 
-
-const MaterialTextInput = ({
+const MaterialTextInput = forwardRef<Ref, TextFieldProps>( ({
   label,
   value,
   onChange,
@@ -12,7 +12,7 @@ const MaterialTextInput = ({
   helperText = '',
   multiline = false,
   rows = 1,
-}: TextFieldProps) => {
+}, ref ) => {
   return (
     <TextField
       fullWidth
@@ -23,10 +23,11 @@ const MaterialTextInput = ({
       type={type}
       error={error}
       helperText={helperText}
-      multiline={multiline}
-      rows={rows}
+      multiline={label === "Pytanie" ? true : multiline}
+      rows={label === "Pytanie" ? 15 : rows}
+      ref={ref}
     />
   );
-};
+});
 
 export default MaterialTextInput;

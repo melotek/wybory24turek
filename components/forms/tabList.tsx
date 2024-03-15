@@ -11,7 +11,6 @@ const TabListComponent = ({forms, handleChange, ariaLabel, }: ITabList) => {
 const theme = useTheme()
 const matches = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px)`)
 
-console.log(matches)
 function responsiveVariant () {
     if (matches) {
         return "scrollable"
@@ -26,7 +25,9 @@ variant={responsiveVariant() as "scrollable" | "fullWidth" }
 
 onChange={handleChange} aria-label={ariaLabel}>
             {forms.map((form: string) => (
-              <Tab sx={{
+              <Tab
+              key={form}
+              sx={{
                 fontSize: ".82rem",
           
               

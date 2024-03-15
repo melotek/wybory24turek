@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Controller, FieldError, useForm } from 'react-hook-form';
 import { Box, Button, useTheme } from '@mui/material';
 import MaterialTextInput from '../shared/textField';
@@ -6,6 +6,8 @@ import SelectOptions from '../shared/selectOptions'; // Ensure this import path 
 import { selectOptions } from './askCondidate.Core';
 import { ZodError, z } from 'zod';
 import questionsAPI from '@/actions/questionsApi';
+import Error from 'next/error';
+import { AxiosResponse } from 'axios';
 
 const SignUpSchema = z.object({
   firstname: z.string({
@@ -59,6 +61,13 @@ export interface IFormInputs {
   question: string;
   // Preference: number | '';
 }
+const mockData = {
+  firstname: "lukas",
+  secondname: "dasdas",
+  email:"dsada@dsad.pl",
+  category: "dsafas",
+  question: "dsacccccccccccccc" 
+}
 const ErrorResolver = (error: ZodError<any>): Record<string, FieldError> => {
   const formErrors: Record<string, FieldError> = {};
   error.errors.forEach((err) => {
@@ -72,7 +81,7 @@ const ErrorResolver = (error: ZodError<any>): Record<string, FieldError> => {
 };
 
 const AskCandidateForMayorForm = () => {
-
+  const [apiResponse, setApiResponse] = useState<AxiosResponse<any, any> | null>(null)
   const { handleSubmit, control, formState: { errors }, setError } = 
   useForm<SignUpSchemaType>({
     defaultValues: {
@@ -95,23 +104,34 @@ const AskCandidateForMayorForm = () => {
         console.error(error);
         return { values: {}, errors: {} }; // You might want to handle this case differently
       }
-    },});
+    },
+  });
 
   const theme = useTheme();
   const onSubmit = async (data: IFormInputs) => {
-  await questionsAPI.createMayorquestion(data)
+    try {
+
+     const  response =  await questionsAPI.createMayorquestion(data)
+
+       setApiResponse(response)
+     console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
   };
-
-
+ useEffect(() => {
+  onSubmit
+ }, [onSubmit])
 
 
   const renderFormInput = (key: FormInputKey, field: any) => {
     // Extract error message for the specific field
     const errorMessage = errors[key]?.message;
-    
+    const ref = useRef<HTMLInputElement | null>(null);
     return (
       <Box sx={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
         <MaterialTextInput
+        ref={ref}
         type='text'
         onChange={(e) => {
           e.target.value.replace(/^\s+/, '');
