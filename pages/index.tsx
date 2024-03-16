@@ -19,24 +19,13 @@ type Data = {
 };
 
 export default function Index() {
-  const { data, error, isLoading } = useSWR<Data>(
-    "{ users { name } }",
-    fetcher,
-  );
 
-  if (error) return <div>Failed to load</div>;
-  if (isLoading) return <div>Loading...</div>;
-  if (!data) return null;
-
-  const { users } = data;
 
   return (
     
     <div>
       <HomeContent/>
-      {users.map((user, index) => (
-        <div key={index}>{user.name}</div>
-      ))}
+     
     </div>
   );
 }

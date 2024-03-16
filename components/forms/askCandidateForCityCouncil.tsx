@@ -8,6 +8,8 @@ import questionsAPI from '@/actions/questionsApi';
 import { AxiosResponse } from 'axios';
 import { validationCityCouncilFromSchema, ErrorResolver } from '@/helpers/formValidations';
 import { ZodError } from 'zod';
+import MyButton from '../shared/buttons';
+import useApiResponse from '@/hooks/zustand/useApiResoponse';
 
 // Define the keys as simple strings to prevent TypeScript issues.
 enum FormInputKey  {
@@ -44,7 +46,8 @@ interface IFormInputs {
 }
 
 const AskoCandidateToCityForm = () => {
-  const [apiResponse, setApiResponse] = useState<AxiosResponse<any, any> | null>(null)
+  // const [apiResponse, setApiResponse] = useState<AxiosResponse<any, any> | null>(null)
+ const setResponse =  useApiResponse((state) => state.setResponse)
   const ref = useRef<HTMLInputElement | null>(null);
 
   const { handleSubmit, control } = useForm<IFormInputs>({
@@ -77,7 +80,7 @@ const AskoCandidateToCityForm = () => {
     try {
      
   const response = await  questionsAPI.createCityCouncilquestion(data) 
-  setApiResponse(response)
+  setResponse(response)
     } catch (error) {
       console.log(error)
     }

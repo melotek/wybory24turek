@@ -1,6 +1,7 @@
 import { Noto_Sans } from 'next/font/google';
 import { createTheme, TypeText } from '@mui/material/styles';
 import { ButtonProps, ButtonBaseProps } from '@mui/material';
+import {Theme} from "@mui/material"
 
 // create a temporary theme to get the default options
 const defaultTheme = createTheme();
@@ -35,6 +36,7 @@ const theme = createTheme({
     } as MyCustomTextColor,
     primary: {
       main: 'rgb(34,45,102)',
+
     },
     secondary: {
       main: 'rgb(202,31,64)'
@@ -48,8 +50,16 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: 'rgb(17, 24, 39)'
+          color: 'rgb(17, 24, 39)',
         }
+      }
+    },
+    MuiOutlinedInput: {
+      styleOverrides:{
+        root: {
+          backgroundColor: 'rgb(255,255,255)',
+        }
+      
       }
     },
     MuiLink: {
@@ -63,10 +73,21 @@ const theme = createTheme({
         },
       },
     },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: 'rgb(17, 24, 39)'
+        }
+      }
+    
+    },
     MuiAppBar: {
       styleOverrides: {
         colorPrimary: {
-          backgroundColor: "#fff"
+          backgroundColor: "#fff",
+          boxShadow: "0px 2px 14px 0 rgba(211,216,224,.65)",
+          borderBottom: "1px solid rgba(0,0,0,.12)"
+
         },
       }
     },
@@ -79,19 +100,26 @@ const theme = createTheme({
       
     },
     },
-    MuiButton: {
-      
+    MuiPaper: {
       styleOverrides: {
         root: {
-          contained: {
-            large: {
-              borderRadius: 100
-            }
-          }
+          backgroundColor: 'rgb(243,246,251)',
+   
         }
-     }
+      }
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: {
+          backgroundColor:'rgb(202,31,64)',
+          color: 'rgb(255,255,255)',
+        }
+      
+    },
     }
-  }
+
+  },
+
 });
 
 export default theme;

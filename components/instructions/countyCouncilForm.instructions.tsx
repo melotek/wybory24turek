@@ -21,49 +21,9 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
+import { categoryInstrucitons, okregiWyborczePowiat } from "@/public/images/staticContent";
 
-interface IOkręgWyborczy {
-    nr: number;
-    zasieg: string;
-    liczbaMandatow: number;
-  }
-  
-  const okregiWyborcze: IOkręgWyborczy[] = [
-    {
-      nr: 1,
-      zasieg: "gmina miejska Turek",
-      liczbaMandatow: 6
-    },
-    {
-      nr: 2,
-      zasieg: "gmina miejsko-wiejska Tuliszków",
-      liczbaMandatow: 3
-    },
-    {
-        nr:3,
-        zasieg: "gmina wiejska Turek",
-        liczbaMandatow: 3
-    },
-    {
-        nr: 4,
-        zasieg:"gmina wiejska Brudzew , gmina miejsko‑wiejska Dobra , gmina wiejska Przykona , gmina wiejska Władysławów",
-        liczbaMandatow: 6
-    }, 
-    {
-        nr: 5,
-        zasieg: "gmina wiejska Kawęczyn, gmina wiejska Malanów",
-        liczbaMandatow: 3
-    }
-];
 
-  const categoryInstrucitons = [
-    "Edukacja i kultura",
-    "Bezpieczeństwo i porządek publiczny",
-    "Zdrowie i opieka społeczna",
-    "Infrastruktura i transport",
-    "Środowisko i ochrona przyrody",
-    "Gospodarka i rozwój lokalny",
-  ];
   
 
 export default function CountyInstrucitons() {
@@ -81,7 +41,7 @@ export default function CountyInstrucitons() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {okregiWyborcze.map((okreg) => (
+                  {okregiWyborczePowiat.map((okreg) => (
                     <TableRow
                       key={okreg.nr}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -135,10 +95,10 @@ export default function CountyInstrucitons() {
           <Box marginTop={theme.spacing(3)}>
             <Typography>Przykładowe kategorie mogą obejmować:</Typography>
             <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+              sx={{ width: "100%", maxWidth: 360,background: 'rgb(243,246,251)' }}
             >
               {categoryInstrucitons.map((value) => (
-                <ListItem key={value} disableGutters disablePadding>
+                <ListItem key={value} disableGutters disablePadding >
                   <ListItemText primary={`${value}`} />
                 </ListItem>
               ))}

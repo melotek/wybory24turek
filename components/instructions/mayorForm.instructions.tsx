@@ -64,10 +64,10 @@ export default function MayorInstructions() {
           <Box marginTop={theme.spacing(3)}>
             <Typography>Przykładowe kategorie mogą obejmować:</Typography>
             <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+              sx={{ width: "100%", maxWidth: 360,   background: 'rgb(243,246,251)'}}
             >
               {categoryInstrucitons.map((value) => (
-                <ListItem key={value} disableGutters disablePadding>
+                <ListItem key={value} disableGutters disablePadding >
                   <ListItemText primary={`${value}`} />
                 </ListItem>
               ))}

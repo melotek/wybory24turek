@@ -2,9 +2,9 @@ import AskoCandidateToCityForm from "@/components/forms/askCandidateForCityCounc
 import AskCandidateToCountyForm from "@/components/forms/askCandidateForCountyCouncil";
 import AskCandidateForMayorForm from "@/components/forms/askCandidateForMayor";
 import TabListComponent from "@/components/forms/tabList";
-import CouncilInstrucitons from "@/components/instructions/cityCouncilForm";
-import CountyInstrucitons from "@/components/instructions/countyCouncilForm";
-import MayorInstructions from "@/components/instructions/mayorForm";
+import CouncilInstrucitons from "@/components/instructions/cityCouncilForm.instructions";
+import CountyInstrucitons from "@/components/instructions/countyCouncilForm.instructions";
+import MayorInstructions from "@/components/instructions/mayorForm.instructions";
 
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useTheme, Box, Tab, Paper, Grid } from "@mui/material";
