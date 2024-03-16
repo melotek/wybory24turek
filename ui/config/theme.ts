@@ -1,7 +1,7 @@
-import { Noto_Sans } from 'next/font/google';
-import { createTheme, TypeText } from '@mui/material/styles';
-import { ButtonProps, ButtonBaseProps } from '@mui/material';
-import {Theme} from "@mui/material"
+import { Noto_Sans } from "next/font/google";
+import { createTheme, TypeText } from "@mui/material/styles";
+import { ButtonProps, ButtonBaseProps } from "@mui/material";
+import { Theme } from "@mui/material";
 
 // create a temporary theme to get the default options
 const defaultTheme = createTheme();
@@ -10,37 +10,34 @@ const defaultTheme = createTheme();
 // const defaultShadows: ThemeOptions['shadows'] = [...defaultTheme.shadows];
 type MyCustomTextColor = {
   darker: string;
-} & TypeText
+} & TypeText;
 
 declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {
     rounded: true;
   }
- }
-
-
+}
 
 export const notoSans = Noto_Sans({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 // Create a theme instance.
 const theme = createTheme({
   palette: {
     text: {
-      primary: 'rgb(91,105,129)',
-      secondary: 'rgb(235, 235, 235)',
-      darker: "rgb(34,45,102)"
+      primary: "rgb(91,105,129)",
+      secondary: "rgb(235, 235, 235)",
+      darker: "rgb(34,45,102)",
     } as MyCustomTextColor,
     primary: {
-      main: 'rgb(34,45,102)',
-
+      main: "rgb(34,45,102)",
     },
     secondary: {
-      main: 'rgb(202,31,64)'
-    }
+      main: "rgb(202,31,64)",
+    },
   },
   typography: {
     fontFamily: notoSans.style.fontFamily,
@@ -50,22 +47,20 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: 'rgb(17, 24, 39)',
-        }
-      }
+          color: "rgb(17, 24, 39)",
+        },
+      },
     },
     MuiOutlinedInput: {
-      styleOverrides:{
+      styleOverrides: {
         root: {
-          backgroundColor: 'rgb(255,255,255)',
-        }
-      
-      }
+          backgroundColor: "rgb(255,255,255)",
+        },
+      },
     },
     MuiLink: {
       styleOverrides: {
         root: {
-
           textDecoration: "none",
           "&:hover": {
             textDecoration: "underline",
@@ -76,50 +71,45 @@ const theme = createTheme({
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          color: 'rgb(17, 24, 39)'
-        }
-      }
-    
+          color: "rgb(17, 24, 39)",
+        },
+      },
     },
     MuiAppBar: {
       styleOverrides: {
         colorPrimary: {
           backgroundColor: "#fff",
           boxShadow: "0px 2px 14px 0 rgba(211,216,224,.65)",
-          borderBottom: "1px solid rgba(0,0,0,.12)"
-
+          borderBottom: "1px solid rgba(0,0,0,.12)",
         },
-      }
+      },
     },
     MuiTab: {
       styleOverrides: {
         root: {
-          color: 'rgb(17, 24, 39)',
-      
-        }
-      
-    },
+          color: "rgb(17, 24, 39)",
+        },
+      },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgb(243,246,251)',
-   
-        }
-      }
+          background:
+            "linear-gradient(180deg, rgba(34,45,102, .125), rgb(243,246,251), rgba(202,31,64, .125))",
+
+          // backgroundColor: 'rgb(243,246,251)',
+        },
+      },
     },
     MuiAccordionSummary: {
       styleOverrides: {
         root: {
-          backgroundColor:'rgb(202,31,64)',
-          color: 'rgb(255,255,255)',
-        }
-      
+          backgroundColor: "rgb(202,31,64)",
+          color: "rgb(255,255,255)",
+        },
+      },
     },
-    }
-
   },
-
 });
 
 export default theme;
