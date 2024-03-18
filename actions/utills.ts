@@ -1,56 +1,55 @@
 import type { NextApiResponse } from "next";
-import  LRUCache  from "lru-cache";
+import LRUCache from "lru-cache";
 // handleRequestCancellation?: () => AbortController
-// 
+//
 type CancelObject<T> = {
-     [P in keyof T]: T[P] & { handleRequestCancellation?: () => AbortController };
-
-}
+  [P in keyof T]: T[P] & { handleRequestCancellation?: () => AbortController };
+};
 
 export function defineCancelApiObject(apiObject: any) {
-    // an object that will contain a cancellation handler
-    // associated to each API property name in the apiObject API object
-    const cancelApiObject: CancelObject<any> = {}
+  // an object that will contain a cancellation handler
+  // associated to each API property name in the apiObject API object
+  const cancelApiObject: CancelObject<any> = {};
 
-    // each property in the apiObject API layer object
-    // is associated with a function that defines an API call
+  // each property in the apiObject API layer object
+  // is associated with a function that defines an API call
 
-    // this loop iterates over each API property name
-    Object.getOwnPropertyNames(apiObject).forEach((apiPropertyName) => {
-    const cancellationControllerObject: { controller: AbortController | undefined } = {
-            controller: undefined,
+  // this loop iterates over each API property name
+  Object.getOwnPropertyNames(apiObject).forEach((apiPropertyName) => {
+    const cancellationControllerObject: {
+      controller: AbortController | undefined;
+    } = {
+      controller: undefined,
+    };
+
+    // associating the request cancellation handler with the API property name
+    cancelApiObject[apiPropertyName] = {
+      handleRequestCancellation: () => {
+        // if the controller already exists,
+        // canceling the request
+        if (cancellationControllerObject.controller) {
+          // canceling the request and returning this custom message
+          cancellationControllerObject.controller.abort();
         }
 
-        // associating the request cancellation handler with the API property name
-        cancelApiObject[apiPropertyName] = {
-            handleRequestCancellation: () => {
-                // if the controller already exists,
-                // canceling the request
-                if (cancellationControllerObject.controller) {
-                    // canceling the request and returning this custom message
-                    cancellationControllerObject.controller.abort()
-                }
+        // generating a new controller
+        // with the AbortController factory
+        cancellationControllerObject.controller = new AbortController();
 
-                // generating a new controller
-                // with the AbortController factory
-                cancellationControllerObject.controller = new AbortController()
+        return cancellationControllerObject.controller;
+      },
+    };
+  });
 
-                return cancellationControllerObject.controller
-            },
-        }
-    })
-
-    return cancelApiObject
+  return cancelApiObject;
 }
-
-
 
 type Options = {
   uniqueTokenPerInterval?: number;
   interval?: number;
 };
 
-export  function rateLimit(options?: Options) {
+export function rateLimit(options?: Options) {
   const tokenCache = new LRUCache({
     max: options?.uniqueTokenPerInterval || 500,
     ttl: options?.interval || 60000,
@@ -76,4 +75,12 @@ export  function rateLimit(options?: Options) {
         return isRateLimited ? reject() : resolve();
       }),
   };
+}
+
+export async function fetcher<JSON = any>(
+  input: RequestInfo,
+  init?: RequestInit,
+): Promise<JSON> {
+  const res = await fetch(input, init);
+  return res.json();
 }

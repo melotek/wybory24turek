@@ -46,4 +46,5 @@ module.exports = {
     "/node_modules/",
     "^.+\\.module\\.(css|sass|scss)$",
   ],
+  verbose: true,
 };

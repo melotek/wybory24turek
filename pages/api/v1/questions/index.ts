@@ -1,12 +1,18 @@
 import { rateLimit } from "@/actions/utills";
 import dbConnect from "@/libs/dbConnect";
-import { questionMayor } from "@/models/questionForm";
+import {
+  questionCityCouncil,
+  questionCountyCouncil,
+  questionMayor,
+} from "@/models/questionForm";
 import { IquestionForms, Recipient } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 interface ResponseData {
   message?: string;
-  questions?: IquestionForms<Recipient>[];
+  questionsMayor?: IquestionForms<Recipient>[];
+  questionsCityCouncil?: IquestionForms<Recipient>[];
+  questionsCountyCouncil?: IquestionForms<Recipient>[];
 }
 
 interface RequestBody extends NextApiRequest {
@@ -26,16 +32,15 @@ export default async function handler(
 
   await dbConnect();
 
-  if (req.method === "POST") {
-    if (req.body.recipient !== "MAYOR") {
-      return res.status(400).json({
-        message: "Pytanie nie jest skierowane do kandydatów na burmistrza",
-      });
-    }
+  if (req.method === "GET") {
     try {
-      await questionMayor.create(req.body);
+      const questionsMayor = await questionMayor.find({});
+      const questionsCityCouncil = await questionCityCouncil.find({});
+      const questionsCountyCouncil = await questionCountyCouncil.find({});
       return res.status(200).json({
-        message: "Twoje pytanie zostało dodane do puli zapytań",
+        questionsMayor: questionsMayor,
+        questionsCityCouncil: questionsCityCouncil,
+        questionsCountyCouncil: questionsCountyCouncil,
       });
     } catch (error) {
       return res

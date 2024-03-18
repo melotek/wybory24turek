@@ -1,6 +1,3 @@
 {
-    "navigation" : ["Zadaj Pytanie", "Lista Pytań", "FAQ", "Zaloguj"]
-
-
-    
+  "navigation": ["Zadaj Pytanie", "Lista Pytań", "FAQ", "Strefa Kandydata"]
 }

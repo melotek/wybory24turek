@@ -22,26 +22,20 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 
-
-
-  const categoryInstrucitons = [
-    "Edukacja i kultura",
-    "Bezpieczeństwo i porządek publiczny",
-    "Zdrowie i opieka społeczna",
-    "Infrastruktura i transport",
-    "Środowisko i ochrona przyrody",
-    "Gospodarka i rozwój lokalny",
-  ];
-  
+const categoryInstrucitons = [
+  "Edukacja i kultura",
+  "Bezpieczeństwo i porządek publiczny",
+  "Zdrowie i opieka społeczna",
+  "Infrastruktura i transport",
+  "Środowisko i ochrona przyrody",
+  "Gospodarka i rozwój lokalny",
+];
 
 export default function MayorInstructions() {
   const theme = useTheme();
 
-
-
   return (
     <Box marginY={theme.spacing(4)}>
-  
       <Accordion defaultExpanded>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -63,11 +57,9 @@ export default function MayorInstructions() {
           </Typography>
           <Box marginTop={theme.spacing(3)}>
             <Typography>Przykładowe kategorie mogą obejmować:</Typography>
-            <List
-              sx={{ width: "100%", maxWidth: 360,   background: 'rgb(243,246,251)'}}
-            >
+            <List sx={{ width: "100%", maxWidth: 360 }}>
               {categoryInstrucitons.map((value) => (
-                <ListItem key={value} disableGutters disablePadding >
+                <ListItem key={value} disableGutters disablePadding>
                   <ListItemText primary={`${value}`} />
                 </ListItem>
               ))}
@@ -75,9 +67,9 @@ export default function MayorInstructions() {
           </Box>
           <Typography gutterBottom>
             Aby właściwie zaklasyfikować swoje pytanie, zastanów się, jaki jest
-            jego główny cel lub którego aspektu dotyczącej powiatu
-            dotyka. Jeśli pytanie dotyczy więcej niż jednej kategorii, wybierz
-            tę, która wydaje się być najbardziej dominująca.
+            jego główny cel lub którego aspektu dotyczącej powiatu dotyka. Jeśli
+            pytanie dotyczy więcej niż jednej kategorii, wybierz tę, która
+            wydaje się być najbardziej dominująca.
           </Typography>
           <Typography gutterBottom>
             Pamiętaj, że wybór kategorii nie tylko ułatwia organizację i
@@ -97,7 +89,6 @@ export default function MayorInstructions() {
               }}
             >
               Ustawa - Dz. U. 1998 Nr 91 poz. 578
-
             </Link>
             , która może dostarczyć więcej informacji na temat zakresu
             odpowiedzialności i działania organów samorządu terytorialnego.

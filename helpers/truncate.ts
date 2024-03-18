@@ -1,4 +1,6 @@
+import transliterate from "@sindresorhus/transliterate";
+
 function replaceSpacesWithHyphens(inputString: string) {
-    return inputString.replace(/\s+/g, '-').toLowerCase();
-  }
-  export default replaceSpacesWithHyphens;
+  return transliterate(inputString).replace(/\s+/g, "-").toLowerCase();
+}
+export default replaceSpacesWithHyphens;

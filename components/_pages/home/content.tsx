@@ -1,5 +1,6 @@
+"use client";
 import { Box, List, ListItem, Typography, useTheme } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Countdown, { calcTimeDelta, formatTimeDelta } from "react-countdown";
 import Image from "next/image";
 type Props = {};
@@ -8,20 +9,41 @@ const targetDate = Date.parse("Apr 07, 2024, 07");
 const HomeContent = (props: Props) => {
   const ref = useRef<HTMLImageElement | null>(null);
   const theme = useTheme();
-  const renderer = ({ days, hours, minutes, seconds }: any) => (
-    <Box display="flex">
-      <Typography variant="subtitle2" marginRight={theme.spacing(1)}>
-        {days} dni{" "}
-      </Typography>
-      <Typography variant="subtitle2">{hours}:</Typography>
-      <Typography variant="subtitle2">{minutes}:</Typography>
-      <Typography variant="subtitle2">{seconds}</Typography>
-    </Box>
-  );
+  const [loaded, isloaded] = useState(false);
+  useEffect(() => {
+    isloaded(true);
+  }, []);
+  const renderer = ({ days, hours, minutes, seconds }: any) => {
+    return (
+      <Box display="flex" flexDirection="column">
+        <Typography paragraph variant="subtitle1" mb={0}>
+          Do wyborów zostało
+        </Typography>
+        <Box display="flex" flexDirection="row">
+          <Typography
+            paragraph
+            variant="subtitle1"
+            marginRight={theme.spacing(1)}
+          >
+            {days} dni{" "}
+          </Typography>
+          <Typography paragraph variant="subtitle1">
+            {hours}:
+          </Typography>
+          <Typography paragraph variant="subtitle1">
+            {minutes}:
+          </Typography>
+          <Typography paragraph variant="subtitle1">
+            {seconds}
+          </Typography>
+        </Box>
+      </Box>
+    );
+  };
 
   return (
     <>
-      <header style={{ display: "block" }}>
+      <header style={{ display: "block", height: "calc(100vh - 176px)" }}>
         <Image
           fill
           ref={ref}
@@ -30,7 +52,7 @@ const HomeContent = (props: Props) => {
             position: "absolute",
             objectFit: "cover",
             objectPosition: "center top",
-            zIndex: -1,
+            // zIndex: 1,
             top: 0,
             left: 0,
             right: 0,
@@ -41,8 +63,9 @@ const HomeContent = (props: Props) => {
 
         <Box
           sx={{
-            height: "calc(100vh - 176px)",
             color: theme.palette.text.secondary,
+            position: "absolute",
+            top: "40vh",
           }}
         >
           <Box
@@ -58,7 +81,9 @@ const HomeContent = (props: Props) => {
             </Typography>
           </Box>
           <Box>
-            <Countdown date={targetDate} renderer={renderer} />
+            {!loaded ? null : (
+              <Countdown date={targetDate} renderer={renderer} />
+            )}
           </Box>
           <Typography
             sx={{

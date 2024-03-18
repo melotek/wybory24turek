@@ -17,6 +17,7 @@
     "@mui/lab": "^5.0.0-alpha.167",
     "@mui/material": "^5.15.12",
     "@mui/material-nextjs": "^5.15.11",
+    "@sindresorhus/transliterate": "^1.6.0",
     "@upstash/ratelimit": "^1.0.1",
     "@vercel/kv": "^1.0.1",
     "axios": "^1.6.7",
@@ -28,7 +29,7 @@
     "react-countdown": "^2.3.5",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.0",
-    "swr": "^2.0.0",
+    "swr": "^2.2.5",
     "zod": "^3.22.4",
     "zustand": "^4.5.2"
   },
@@ -40,6 +41,7 @@
     "@types/node": "^18.0.2",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@types/react-test-renderer": "^18.0.7",
     "babel-jest": "^29.7.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.2",
@@ -47,6 +49,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.2.5",
     "prettier-eslint": "^16.3.0",
+    "react-test-renderer": "^18.2.0",
     "typescript": "^4.7.4"
   }
 }

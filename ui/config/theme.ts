@@ -11,7 +11,10 @@ const defaultTheme = createTheme();
 type MyCustomTextColor = {
   darker: string;
 } & TypeText;
-
+type ThemeProps = {
+  ownerState: any;
+  theme: Theme;
+};
 declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {
     rounded: true;
@@ -25,7 +28,7 @@ export const notoSans = Noto_Sans({
 });
 
 // Create a theme instance.
-const theme = createTheme({
+const staticTheme = createTheme({
   palette: {
     text: {
       primary: "rgb(91,105,129)",
@@ -91,16 +94,8 @@ const theme = createTheme({
         },
       },
     },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          background:
-            "linear-gradient(180deg, rgba(34,45,102, .125), rgb(243,246,251), rgba(202,31,64, .125))",
+    MuiPaper: {},
 
-          // backgroundColor: 'rgb(243,246,251)',
-        },
-      },
-    },
     MuiAccordionSummary: {
       styleOverrides: {
         root: {
@@ -109,7 +104,25 @@ const theme = createTheme({
         },
       },
     },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          background: "transparent",
+        },
+      },
+    },
   },
 });
-
+const theme = createTheme(staticTheme, {
+  components: {
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          paddingLeft: staticTheme.spacing(8) + " !important",
+          paddingRight: staticTheme.spacing(8) + " !important",
+        },
+      },
+    },
+  },
+});
 export default theme;
