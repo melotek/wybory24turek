@@ -1,4 +1,4 @@
-import type { IquestionForms, Recipient } from "@/types.ts";
+import type { IquestionForms, Recipient } from "@/types";
 import { Schema, model, models } from "mongoose";
 
 export const questionFormSchema = new Schema<IquestionForms<Recipient>>({
