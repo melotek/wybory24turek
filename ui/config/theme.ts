@@ -1,7 +1,12 @@
 import { Noto_Sans } from "next/font/google";
 import { createTheme, TypeText } from "@mui/material/styles";
-import { ButtonProps, ButtonBaseProps } from "@mui/material";
+import {
+  ButtonProps,
+  ButtonBaseProps,
+  responsiveFontSizes,
+} from "@mui/material";
 import { Theme } from "@mui/material";
+import { ThemeContext } from "@emotion/react";
 
 // create a temporary theme to get the default options
 const defaultTheme = createTheme();
@@ -51,6 +56,13 @@ const staticTheme = createTheme({
       styleOverrides: {
         root: {
           color: "rgb(17, 24, 39)",
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          marginBottom: "1rem",
         },
       },
     },
@@ -113,16 +125,27 @@ const staticTheme = createTheme({
     },
   },
 });
-const theme = createTheme(staticTheme, {
+const responsiveTheme = createTheme(staticTheme, {
   components: {
     MuiContainer: {
       styleOverrides: {
         root: {
-          paddingLeft: staticTheme.spacing(8) + " !important",
-          paddingRight: staticTheme.spacing(8) + " !important",
+          margin: 0,
+          boxSizing: "border-box",
+          [staticTheme.breakpoints.up("md")]: {
+            paddingLeft: staticTheme.spacing(8) + " !important",
+            paddingRight: staticTheme.spacing(8) + " !important",
+          },
+          [staticTheme.breakpoints.down("md")]: {
+            margin: 0 + " !important",
+
+            paddingLeft: staticTheme.spacing(3) + " !important",
+            paddingRight: staticTheme.spacing(3) + " !important",
+          },
         },
       },
     },
   },
 });
+const theme = responsiveFontSizes(responsiveTheme);
 export default theme;

@@ -1,12 +1,23 @@
 "use client";
-import { Box, List, ListItem, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  Typography,
+  useTheme,
+  Button,
+} from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import Countdown, { calcTimeDelta, formatTimeDelta } from "react-countdown";
 import Image from "next/image";
+import Link from "@/components/shared/linkCore.composed";
+import { useRouter } from "next/router";
 type Props = {};
 const targetDate = Date.parse("Apr 07, 2024, 07");
 
 const HomeContent = (props: Props) => {
+  const router = useRouter();
+
   const ref = useRef<HTMLImageElement | null>(null);
   const theme = useTheme();
   const [loaded, isloaded] = useState(false);
@@ -16,24 +27,20 @@ const HomeContent = (props: Props) => {
   const renderer = ({ days, hours, minutes, seconds }: any) => {
     return (
       <Box display="flex" flexDirection="column">
-        <Typography paragraph variant="subtitle1" mb={0}>
-          Do wyborów zostało
+        <Typography paragraph variant="body2" mb={0}>
+          Do wyborów pozostało:
         </Typography>
         <Box display="flex" flexDirection="row">
-          <Typography
-            paragraph
-            variant="subtitle1"
-            marginRight={theme.spacing(1)}
-          >
+          <Typography paragraph variant="body2" marginRight={theme.spacing(1)}>
             {days} dni{" "}
           </Typography>
-          <Typography paragraph variant="subtitle1">
+          <Typography paragraph variant="body2">
             {hours}:
           </Typography>
-          <Typography paragraph variant="subtitle1">
+          <Typography paragraph variant="body2">
             {minutes}:
           </Typography>
-          <Typography paragraph variant="subtitle1">
+          <Typography paragraph variant="body2">
             {seconds}
           </Typography>
         </Box>
@@ -43,7 +50,7 @@ const HomeContent = (props: Props) => {
 
   return (
     <>
-      <header style={{ display: "block", height: "calc(100vh - 176px)" }}>
+      <header style={{ display: "block", height: "100vh" }}>
         <Image
           fill
           ref={ref}
@@ -72,37 +79,46 @@ const HomeContent = (props: Props) => {
             p={theme.spacing(2)}
             sx={{ background: "rgba(17, 24, 99, 0.38)" }}
           >
-            <Typography component="h1" variant="h3" gutterBottom>
+            <Typography component="h1" variant="h4" gutterBottom>
               Masz pytania dotyczące naszej społeczności?
             </Typography>
-            <Typography paragraph>
+            <Typography paragraph variant="body2">
               Jeśli jesteś mieszkańcem i masz pytania, które mogą wpłynąć na
               naszą przyszłość, to jest to miejsce dla Ciebie!
             </Typography>
           </Box>
+          <Button
+            onClick={() => router.push("/zadaj-pytanie/pytania-burmistrz")}
+            variant="contained"
+            sx={{ margin: theme.spacing(2, 0) }}
+            color="secondary"
+          >
+            Bądź wymagający, zadaj pytanie
+          </Button>
+
           <Box>
             {!loaded ? null : (
               <Countdown date={targetDate} renderer={renderer} />
             )}
           </Box>
-          <Typography
-            sx={{
-              position: "absolute",
-              bottom: theme.spacing(4),
-              right: theme.spacing(4),
-            }}
-            variant="caption"
-          >
-            https://www.freepik.com
-          </Typography>
         </Box>
+        <Typography
+          sx={{
+            position: "absolute",
+            bottom: theme.spacing(1),
+            right: theme.spacing(1),
+          }}
+          variant="caption"
+        >
+          https://www.freepik.com
+        </Typography>
       </header>
 
       <section>
-        <Typography component="h2" variant="h4" gutterBottom>
+        <Typography component="h2" variant="h5" gutterBottom>
           Dlaczego warto zadawać pytania?
         </Typography>
-        <Typography component="h3" variant="h5" gutterBottom>
+        <Typography component="h3" variant="h6" gutterBottom>
           Twój głos ma znaczenie
         </Typography>
         <Typography paragraph>
@@ -110,7 +126,7 @@ const HomeContent = (props: Props) => {
           dla naszej społeczności.
         </Typography>
 
-        <Typography component="h3" variant="h5" gutterBottom>
+        <Typography component="h3" variant="h6" gutterBottom>
           Archiwizacja dla przyszłości
         </Typography>
         <Typography paragraph>
@@ -118,7 +134,7 @@ const HomeContent = (props: Props) => {
           kolejnych wyborów, zapewniając transparentność i ciągłość dialogu.
         </Typography>
 
-        <Typography component="h3" variant="h5" gutterBottom>
+        <Typography component="h3" variant="h6" gutterBottom>
           Budowanie fundamentu dla debaty
         </Typography>
         <Typography paragraph>
@@ -128,7 +144,7 @@ const HomeContent = (props: Props) => {
       </section>
 
       <section>
-        <Typography component="h2" variant="h4" gutterBottom>
+        <Typography component="h2" variant="h5" gutterBottom>
           Zachęcamy do podpisywania się imieniem i nazwiskiem
         </Typography>
         <Typography paragraph>
@@ -136,7 +152,7 @@ const HomeContent = (props: Props) => {
           przejrzystej i otwartej debaty. Pokazujesz, że stoisz za swoimi
           słowami, co zwiększa ich wartość i znaczenie.
         </Typography>
-        <Typography component="h3" variant="h5" gutterBottom>
+        <Typography component="h3" variant="h6" gutterBottom>
           Nie bój się swoich pytań, bądź z nich dumny
         </Typography>
         <Typography paragraph>
@@ -147,7 +163,7 @@ const HomeContent = (props: Props) => {
       </section>
 
       <section>
-        <Typography component="h2" variant="h4" gutterBottom>
+        <Typography component="h2" variant="h5" gutterBottom>
           Weź udział w kształtowaniu naszej wspólnej przyszłości
         </Typography>
         <Typography paragraph>
@@ -155,7 +171,7 @@ const HomeContent = (props: Props) => {
           szansy na bezpośredni wpływ na kierunek, w jakim podąża nasza
           społeczność.
         </Typography>
-        <Typography component="h3" variant="h5" gutterBottom>
+        <Typography component="em" variant="h6" gutterBottom>
           Wypełnij ankietę już dziś!
         </Typography>
       </section>
@@ -183,7 +199,7 @@ const HomeContent = (props: Props) => {
           jutra naszej społeczności.
         </Typography>
 
-        <Typography component="h2" variant="h4" gutterBottom>
+        <Typography component="h2" variant="h5" gutterBottom>
           Jak możesz pomóc?
         </Typography>
         <List>

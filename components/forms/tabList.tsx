@@ -1,40 +1,52 @@
-import { TabList } from "@mui/lab"
-import { Tab, Tabs, useMediaQuery, useTheme } from "@mui/material"
+// import { Tabs } from "@mui/lab"
+import { Tab, Tabs, useMediaQuery, useTheme } from "@mui/material";
 
 type ITabList = {
-    forms: string[]
-    handleChange: (event: React.SyntheticEvent, newValue: string) => void,
-    ariaLabel: string,
-} 
+  forms: string[];
+  handleChange: (event: React.SyntheticEvent, newValue: string) => void;
+  ariaLabel: string;
+  selectedTab?: string;
+};
 
-const TabListComponent = ({forms, handleChange, ariaLabel, }: ITabList) => {
-const theme = useTheme()
-const matches = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px)`)
+const TabListComponent = ({
+  forms,
+  handleChange,
+  ariaLabel,
+  selectedTab,
+}: ITabList) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(
+    `(max-width: ${theme.breakpoints.values.md}px)`,
+  );
 
-function responsiveVariant () {
+  function responsiveVariant() {
     if (matches) {
-        return "scrollable"
-}
-    return "fullWidth"
-    
+      return "scrollable";
     }
-    return (
-<>
-<TabList  
-variant={responsiveVariant() as "scrollable" | "fullWidth" }
-
-onChange={handleChange} aria-label={ariaLabel}>
-            {forms.map((form: string) => (
-              <Tab
-              key={form}
-              sx={{
-                fontSize: ".82rem",
-          
-              
-              }}  label={form} value={form} />
-            ))}
-          </TabList>
-        </>
-    )
-}
-export default TabListComponent
+    return "fullWidth";
+  }
+  return (
+    <>
+      <Tabs
+        variant="scrollable"
+        scrollButtons
+        allowScrollButtonsMobile
+        onChange={handleChange}
+        aria-label={ariaLabel}
+        value={selectedTab}
+      >
+        {forms.map((form: string) => (
+          <Tab
+            key={form}
+            sx={{
+              fontSize: ".82rem",
+            }}
+            label={form}
+            value={form}
+          />
+        ))}
+      </Tabs>
+    </>
+  );
+};
+export default TabListComponent;

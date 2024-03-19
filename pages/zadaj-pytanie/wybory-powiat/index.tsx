@@ -5,6 +5,7 @@ import TabListComponent from "@/components/forms/tabList";
 import CouncilInstrucitons from "@/components/instructions/cityCouncilForm.instructions";
 import CountyInstrucitons from "@/components/instructions/countyCouncilForm.instructions";
 import MayorInstructions from "@/components/instructions/mayorForm.instructions";
+import SubPageHeader from "@/components/shared/subPageHeader";
 
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useTheme, Box, Tab, Paper, Grid } from "@mui/material";
@@ -23,13 +24,9 @@ const ZadajPytanie = (props: Props) => {
     "Pytanie do kandydatów na radnych powiatu",
   ];
   const [value, setValue] = React.useState<string>(forms[2]);
-  const formPathnames = [
-    "wybory-burmistrz",
-    "wybory-gmina",
-    "wybory-powiat"
-  ]
-  const router = useRouter()
-  
+  const formPathnames = ["wybory-burmistrz", "wybory-gmina", "wybory-powiat"];
+  const router = useRouter();
+
   const handleChange = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
       // Ustalanie indeksu na podstawie wartości newValue
@@ -38,47 +35,56 @@ const ZadajPytanie = (props: Props) => {
       // Ustawianie pathname na podstawie znalezionego indeksu
       const newPathname = formPathnames[formIndex];
       // Używanie hooka useRouter do przekierowania
-      router.push(newPathname)
+      router.push(newPathname);
       setValue(newValue);
-
     },
-    [forms, formPathnames, router]
+    [forms, formPathnames, router],
   );
   return (
-    <Box
-      sx={{
-        marginLeft: "auto",
-        marginRight: "auto",
-   
-      }}
-    >
-
+    <Box>
+      <SubPageHeader title="Zadaj pytanie przyszłemu radnemu rady powiatu" />
 
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <TabListComponent forms={forms} handleChange={handleChange} ariaLabel="Pytania do kandydatów do rady powiatu"/> 
+          <TabListComponent
+            forms={forms}
+            handleChange={handleChange}
+            selectedTab={value}
+            ariaLabel="Pytania do kandydatów do rady powiatu"
+          />
         </Box>
         <Box>
-              <Grid container spacing={2}>
-
-              <Grid item xs={12} md={6}>
-        <Paper  sx={{padding: theme.spacing(4)}}>
-
-      
-              <AskCandidateToCountyForm />
-        </Paper>
-        </Grid>
-        <Grid item xs={12}md={6}>
-        <Paper  sx={{padding: theme.spacing(4)}}>
-     
-                            <CountyInstrucitons />
-
-        </Paper>
-        </Grid>
-
-        </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Paper
+                sx={(theme) => ({
+                  [theme.breakpoints.up("md")]: {
+                    padding: theme.spacing(6, 4),
+                  },
+                  [theme.breakpoints.down("md")]: {
+                    padding: theme.spacing(4, 2),
+                  },
+                })}
+              >
+                <AskCandidateToCountyForm />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Paper
+                sx={(theme) => ({
+                  [theme.breakpoints.up("md")]: {
+                    padding: theme.spacing(6, 4),
+                  },
+                  [theme.breakpoints.down("md")]: {
+                    padding: theme.spacing(4, 2),
+                  },
+                })}
+              >
+                <CountyInstrucitons />
+              </Paper>
+            </Grid>
+          </Grid>
         </Box>
-
       </TabContext>
     </Box>
   );

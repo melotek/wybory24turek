@@ -1,3 +1,9 @@
 {
-  "navigation": ["Zadaj Pytanie", "Lista Pytań", "FAQ", "Strefa Kandydata"]
+  "navigation": [
+    "Zadaj Pytanie",
+    "Lista Pytań",
+    "FAQ",
+    "Strefa Kandydata",
+    "https://www.facebook.com/wybory24turek"
+  ]
 }

@@ -35,7 +35,7 @@ export default function MayorInstructions() {
   const theme = useTheme();
 
   return (
-    <Box marginY={theme.spacing(4)}>
+    <Box>
       <Accordion defaultExpanded>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

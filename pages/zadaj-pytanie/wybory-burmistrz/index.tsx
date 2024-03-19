@@ -5,6 +5,7 @@ import TabListComponent from "@/components/forms/tabList";
 import CouncilInstrucitons from "@/components/instructions/cityCouncilForm.instructions";
 import CountyInstrucitons from "@/components/instructions/countyCouncilForm.instructions";
 import MayorInstructions from "@/components/instructions/mayorForm.instructions";
+import SubPageHeader from "@/components/shared/subPageHeader";
 import useApiResponse from "@/hooks/zustand/useApiResoponse";
 
 import { TabContext, TabList, TabPanel } from "@mui/lab";
@@ -38,15 +39,12 @@ const ZadajPytanie = (props: Props) => {
     [forms, formPathnames, router],
   );
   return (
-    <Box
-      sx={{
-        marginLeft: "auto",
-        marginRight: "auto",
-      }}
-    >
+    <Box>
+      <SubPageHeader title="Zadaj pytanie przyszłemu burmistrzowi" />
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabListComponent
+            selectedTab={value}
             forms={forms}
             handleChange={handleChange}
             ariaLabel="Pokaż pytania do kandydata na butmistrza"
@@ -55,12 +53,30 @@ const ZadajPytanie = (props: Props) => {
         <Box>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <Paper sx={{ padding: theme.spacing(4) }}>
+              <Paper
+                sx={(theme) => ({
+                  [theme.breakpoints.up("md")]: {
+                    padding: theme.spacing(6, 4),
+                  },
+                  [theme.breakpoints.down("md")]: {
+                    padding: theme.spacing(4, 2),
+                  },
+                })}
+              >
                 <AskCandidateForMayorForm />
               </Paper>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Paper sx={{ padding: theme.spacing(4) }}>
+              <Paper
+                sx={(theme) => ({
+                  [theme.breakpoints.up("md")]: {
+                    padding: theme.spacing(6, 4),
+                  },
+                  [theme.breakpoints.down("md")]: {
+                    padding: theme.spacing(4, 2),
+                  },
+                })}
+              >
                 <MayorInstructions />
               </Paper>
             </Grid>

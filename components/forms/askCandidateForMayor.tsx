@@ -1,34 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Controller, FieldError, useForm } from 'react-hook-form';
-import { Box, Button, useTheme } from '@mui/material';
-import MaterialTextInput from '../shared/textField';
-import SelectOptions from '../shared/selectOptions'; // Ensure this import path is correct
-import { selectOptions } from './askCondidate.Core';
-import { ZodError, z } from 'zod';
-import questionsAPI from '@/actions/questionsApi';
-import Error from 'next/error';
-import { AxiosResponse } from 'axios';
-import { ErrorResolver, ValidationMayorFrom, validationMayorFromSchema } from '@/helpers/formValidations';
-import MyButton from '../shared/buttons';
+import React, { useEffect, useRef, useState } from "react";
+import { Controller, FieldError, useForm } from "react-hook-form";
+import { Box, Button, useTheme } from "@mui/material";
+import MaterialTextInput from "../shared/textField";
+import SelectOptions from "../shared/selectOptions"; // Ensure this import path is correct
+import { selectOptions } from "./askCondidate.Core";
+import { ZodError, z } from "zod";
+import questionsAPI from "@/actions/questionsApi";
+import Error from "next/error";
+import { AxiosResponse } from "axios";
+import {
+  ErrorResolver,
+  ValidationMayorFrom,
+  validationMayorFromSchema,
+} from "@/helpers/formValidations";
+import MyButton from "../shared/buttons";
 
-
-enum FormInputKey  {
-  firstname =  'firstname',
-  secondname = 'secondname',
-  email = 'email',
-//   district= 'district',
-  category = 'category',
-  question=  'question',
+enum FormInputKey {
+  firstname = "firstname",
+  secondname = "secondname",
+  email = "email",
+  //   district= 'district',
+  category = "category",
+  question = "question",
 }
 
-
-
 const formInputLabels = {
-  firstname: 'Imię',
-  secondname: 'Nazwisko',
-  email: 'Email',
-  category: 'Kategoria',
-  question: 'Pytanie',
+  firstname: "Imię",
+  secondname: "Nazwisko",
+  email: "Email",
+  category: "Kategoria",
+  question: "Pytanie",
 };
 
 export interface IFormInputs {
@@ -40,17 +41,22 @@ export interface IFormInputs {
   // Preference: number | '';
 }
 
-
 const AskCandidateForMayorForm = () => {
-  const [apiResponse, setApiResponse] = useState<AxiosResponse<any, any> | null>(null)
-  const { handleSubmit, control, formState: { errors } } = 
-  useForm<ValidationMayorFrom>({
+  const [apiResponse, setApiResponse] = useState<AxiosResponse<
+    any,
+    any
+  > | null>(null);
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<ValidationMayorFrom>({
     defaultValues: {
-      firstname: '',
-      secondname: '',
-      email: '',
-      category: '',
-      question: '',
+      firstname: "",
+      secondname: "",
+      email: "",
+      category: "",
+      question: "",
       // Preference: '',
     },
     resolver: async (data) => {
@@ -71,18 +77,16 @@ const AskCandidateForMayorForm = () => {
   const theme = useTheme();
   const onSubmit = async (data: IFormInputs) => {
     try {
+      const response = await questionsAPI.createMayorquestion(data);
 
-     const  response =  await questionsAPI.createMayorquestion(data)
-
-       setApiResponse(response)
+      setApiResponse(response);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
- useEffect(() => {
-  onSubmit
- }, [onSubmit])
-
+  useEffect(() => {
+    onSubmit;
+  }, [onSubmit]);
 
   const renderFormInput = (key: FormInputKey, field: any) => {
     // Extract error message for the specific field
@@ -91,11 +95,11 @@ const AskCandidateForMayorForm = () => {
     return (
       <Box sx={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}>
         <MaterialTextInput
-        ref={ref}
-        type='text'
-        onChange={(e) => {
-          e.target.value.replace(/^\s+/, '');
-        }}
+          ref={ref}
+          type="text"
+          onChange={(e) => {
+            e.target.value.replace(/^\s+/, "");
+          }}
           label={formInputLabels[key]}
           error={Boolean(errors[key])} // Pass a boolean to indicate if this field is in error state
           helperText={errorMessage} // Pass the error message to display below the input
@@ -116,14 +120,17 @@ const AskCandidateForMayorForm = () => {
           render={({ field }) => renderFormInput(key as FormInputKey, field)}
         />
       ))}
-      <MyButton variant="contained" type="submit" color="secondary" size="large" isRounded={true}>
-
+      <MyButton
+        variant="contained"
+        type="submit"
+        color="secondary"
+        size="large"
+        isRounded={true}
+      >
         Wysyłam pytanie
       </MyButton>
-
     </form>
   );
 };
 
 export default AskCandidateForMayorForm;
-

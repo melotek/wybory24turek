@@ -25,6 +25,7 @@ import theme from "@/ui/config/theme";
 import PersonIcon from "@mui/icons-material/Person";
 import replaceSpacesWithHyphens from "@/helpers/truncate";
 import Logo from "./logo";
+import FacebookIcon from "@mui/icons-material/Facebook";
 type Props = {};
 
 type MyLinkProps = {
@@ -93,13 +94,18 @@ const Navbar: React.FC<Props> = () => {
               alignSelf: "center", // Center items vertically
               justifyContent: "center", // Center items horizontally
               textDecoration: "none",
+              marginBottom: 0,
             }}
           >
-            <PersonIcon sx={{ marginRight: theme.spacing(1) }}></PersonIcon>
+            <PersonIcon
+              sx={{ marginRight: theme.spacing(1), marginBottom: 0 }}
+            ></PersonIcon>
             <Typography
               color={theme.palette.text.primary}
               component="span"
+              gutterBottom={false}
               variant="subtitle2"
+              sx={{ marginBottom: 0 }}
             >
               {item}
             </Typography>
@@ -114,20 +120,35 @@ const Navbar: React.FC<Props> = () => {
           ></Divider>
         </>
       );
+    } else if (item === "https://www.facebook.com/wybory24turek") {
+      return (
+        <Link
+          color={theme.palette.text.primary}
+          key={item}
+          href={"https://www.facebook.com/wybory24turek"}
+          target="_blank"
+          referrerPolicy="no-referrer"
+          sx={{ maxWidth: "2rem", py: theme.spacing(2), marginBottom: 0 }}
+        >
+          <FacebookIcon />
+        </Link>
+      );
     } else {
       return (
         <Link
           color={theme.palette.text.primary}
           key={item}
           href={"/" + replaceSpacesWithHyphens(populateUrls)}
-          sx={{ textDecoration: "none", py: theme.spacing(2) }}
+          sx={{ textDecoration: "none", py: theme.spacing(2), marginBottom: 0 }}
         >
           <Typography
             variant="subtitle2"
+            gutterBottom={false}
             sx={{
               display: "flex", // Use flex display to align items
               alignItems: "center", // Center items vertically
               justifyContent: "center", // Center items horizontally
+              marginBottom: 0,
               textDecoration: "none",
             }}
           >
