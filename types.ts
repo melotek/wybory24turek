@@ -45,10 +45,10 @@ export interface IquestionRating {
   rating: Pick<IRating, "rating">[]; // Średnia ocena pytania
 } // Rating.ts
 export interface IAppData {
-  questionForms: questionForm[]; // Formularze pytań
+  questionForms: IquestionForms<"MAYOR" | "CITY_COUNCIL" | "COUNTY_COUNCIL">[]; // Formularze pytań
   users: User[]; // Zalogowani użytkownicy
-  ratings: Rating[]; // Oceny pytań
-  questionRates: questionRating[]; // Zapytania widoczne do oceny
+  ratings: IRating[]; // Oceny pytań
+  questionRates: IquestionRating[]; // Zapytania widoczne do oceny
 }
 
 // Możliwe dodatkowe typy dla obsługi formularza i autoryzacji:
