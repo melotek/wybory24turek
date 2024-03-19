@@ -6,12 +6,15 @@ import {
   Typography,
   useTheme,
   Button,
+  Grid,
+  Container,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import Countdown, { calcTimeDelta, formatTimeDelta } from "react-countdown";
 import Image from "next/image";
 import Link from "@/components/shared/linkCore.composed";
 import { useRouter } from "next/router";
+import ContentCard from "./contentCard";
 type Props = {};
 const targetDate = Date.parse("Apr 07, 2024, 07");
 
@@ -50,7 +53,13 @@ const HomeContent = (props: Props) => {
 
   return (
     <>
-      <header style={{ display: "block", height: "100vh" }}>
+      <Container
+        sx={{
+          display: "block",
+          height: "100vh",
+        }}
+        component="header"
+      >
         <Image
           fill
           ref={ref}
@@ -59,7 +68,9 @@ const HomeContent = (props: Props) => {
             position: "absolute",
             objectFit: "cover",
             objectPosition: "center top",
-            // zIndex: 1,
+
+            marginLeft: 0,
+            marginRight: 0, // zIndex: 1,
             top: 0,
             left: 0,
             right: 0,
@@ -79,7 +90,7 @@ const HomeContent = (props: Props) => {
             p={theme.spacing(2)}
             sx={{ background: "rgba(17, 24, 99, 0.38)" }}
           >
-            <Typography component="h1" variant="h4" gutterBottom>
+            <Typography component="h2" variant="h4" gutterBottom>
               Masz pytania dotyczące naszej społeczności?
             </Typography>
             <Typography paragraph variant="body2">
@@ -112,38 +123,81 @@ const HomeContent = (props: Props) => {
         >
           https://www.freepik.com
         </Typography>
-      </header>
-
-      <section>
-        <Typography component="h2" variant="h5" gutterBottom>
+      </Container>
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          "&::before": {
+            content: "''",
+            position: "absolute",
+            top: theme.spacing(0),
+            right: theme.spacing(0),
+            zIndex: "-20",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            width: theme.spacing(40),
+            height: theme.spacing(40),
+            backgroundImage: "url(/images/herbWatermark.png)",
+          },
+        }}
+      >
+        <Container component="section">
+          {/* <Typography component="h2" variant="h5" gutterBottom>
           Dlaczego warto zadawać pytania?
-        </Typography>
-        <Typography component="h3" variant="h6" gutterBottom>
-          Twój głos ma znaczenie
-        </Typography>
-        <Typography paragraph>
-          Zadając pytania, aktywnie wpływasz na debatę publiczną i decyzje ważne
-          dla naszej społeczności.
-        </Typography>
+        </Typography> */}
 
-        <Typography component="h3" variant="h6" gutterBottom>
-          Archiwizacja dla przyszłości
-        </Typography>
-        <Typography paragraph>
-          Wszystkie pytania zostaną zarchiwizowane i będą dostępne online aż do
-          kolejnych wyborów, zapewniając transparentność i ciągłość dialogu.
-        </Typography>
+          <Typography
+            component="h2"
+            variant="h4"
+            sx={{
+              marginBottom: theme.spacing(15),
+              marginTop: theme.spacing(15),
+            }}
+          >
+            Teraz masz bezpośredni wkład w debatę wyborczą.
+          </Typography>
 
-        <Typography component="h3" variant="h6" gutterBottom>
-          Budowanie fundamentu dla debaty
-        </Typography>
-        <Typography paragraph>
-          Zbierając merytoryczne pytania, przygotowujemy solidną podstawę dla
-          sensownej debaty, w której każdy mieszkaniec ma bezpośredni głos.
-        </Typography>
-      </section>
-
-      <section>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6} md={6} lg={4}>
+              <ContentCard>
+                <Typography component="h3" variant="h6" gutterBottom>
+                  Twój głos w debacie ma znaczenie
+                </Typography>
+                <Typography paragraph>
+                  Zadając pytania, aktywnie wpływasz na debatę publiczną i
+                  decyzje ważne dla naszej społeczności.
+                </Typography>
+              </ContentCard>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={4}>
+              <ContentCard>
+                <Typography component="h3" variant="h6" gutterBottom>
+                  Archiwizacja dla przyszłości
+                </Typography>
+                <Typography paragraph>
+                  Odpowiedzi zostaną zarchiwizowane i będą dostępne online aż do
+                  kolejnych wyborów, zapewniając transparentność i ciągłość
+                  dialogu.
+                </Typography>
+              </ContentCard>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={4}>
+              <ContentCard>
+                <Typography component="h3" variant="h6" gutterBottom>
+                  Budowanie fundamentu dla debaty
+                </Typography>
+                <Typography paragraph>
+                  Zbierając merytoryczne pytania, przygotowujemy solidną
+                  podstawę dla sensownej debaty, w której każdy mieszkaniec ma
+                  bezpośredni głos.
+                </Typography>
+              </ContentCard>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+      <Container component="section">
         <Typography component="h2" variant="h5" gutterBottom>
           Zachęcamy do podpisywania się imieniem i nazwiskiem
         </Typography>
@@ -160,9 +214,9 @@ const HomeContent = (props: Props) => {
           Bycie sygnatariuszem swojego zapytania to dowód odwagi i zaangażowania
           w dobro wspólne.
         </Typography>
-      </section>
+      </Container>
 
-      <section>
+      <Container component="section">
         <Typography component="h2" variant="h5" gutterBottom>
           Weź udział w kształtowaniu naszej wspólnej przyszłości
         </Typography>
@@ -174,8 +228,8 @@ const HomeContent = (props: Props) => {
         <Typography component="em" variant="h6" gutterBottom>
           Wypełnij ankietę już dziś!
         </Typography>
-      </section>
-      <section>
+      </Container>
+      <Container component="section">
         <Typography paragraph>
           W ostatnim tygodniu przed wyborami planujemy zorganizować debatę Q&A,
           która da Wam, drodzy mieszkańcy, niepowtarzalną okazję do zadania
@@ -221,7 +275,7 @@ const HomeContent = (props: Props) => {
             debaty!
           </ListItem>
         </List>
-      </section>
+      </Container>
     </>
   );
 };

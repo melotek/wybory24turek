@@ -130,17 +130,17 @@ const responsiveTheme = createTheme(staticTheme, {
     MuiContainer: {
       styleOverrides: {
         root: {
-          margin: 0,
+          margin: "auto",
           boxSizing: "border-box",
           [staticTheme.breakpoints.up("md")]: {
-            paddingLeft: staticTheme.spacing(8) + " !important",
-            paddingRight: staticTheme.spacing(8) + " !important",
+            paddingLeft: staticTheme.spacing(8),
+            paddingRight: staticTheme.spacing(8),
           },
           [staticTheme.breakpoints.down("md")]: {
-            margin: 0 + " !important",
+            margin: 0,
 
-            paddingLeft: staticTheme.spacing(3) + " !important",
-            paddingRight: staticTheme.spacing(3) + " !important",
+            paddingLeft: staticTheme.spacing(3),
+            paddingRight: staticTheme.spacing(3),
           },
         },
       },

@@ -1,4 +1,5 @@
 import HomeContent from "@/components/_pages/home/content";
+import { Box, useTheme } from "@mui/material";
 import useSWR from "swr";
 
 const fetcher = (query: string) =>
@@ -19,13 +20,10 @@ type Data = {
 };
 
 export default function Index() {
-
-
+  const theme = useTheme();
   return (
-    
-    <div>
-      <HomeContent/>
-     
-    </div>
+    <Box>
+      <HomeContent />
+    </Box>
   );
 }
