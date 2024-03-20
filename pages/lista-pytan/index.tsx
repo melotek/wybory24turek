@@ -3,7 +3,6 @@ import { fetcher } from "@/actions/utills";
 import QuestionViewUserPanel from "@/components/_pages/listaPytan/questionViewUserPanel";
 import SubPageHeader from "@/components/shared/subPageHeader";
 import { Box, Container, Paper, Typography, useTheme } from "@mui/material";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
 import React from "react";
 import useSWR from "swr";
 

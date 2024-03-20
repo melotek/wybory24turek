@@ -13,7 +13,8 @@ import theme from "@/ui/config/theme";
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
   return (
-    <AppCacheProvider {...props}>
+    // <AppCacheProvider {...props}>
+    <>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
@@ -24,6 +25,7 @@ export default function MyApp(props: AppProps) {
           <Component pageProps={pageProps} />
         </Layout>
       </ThemeProvider>
-    </AppCacheProvider>
+    </>
+    // </AppCacheProvider>
   );
 }

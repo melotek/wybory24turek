@@ -1,18 +1,12 @@
-import AskoCandidateToCityForm from "@/components/forms/askCandidateForCityCouncil";
-import AskCandidateToCountyForm from "@/components/forms/askCandidateForCountyCouncil";
 import AskCandidateForMayorForm from "@/components/forms/askCandidateForMayor";
 import TabListComponent from "@/components/forms/tabList";
-import CouncilInstrucitons from "@/components/instructions/cityCouncilForm.instructions";
-import CountyInstrucitons from "@/components/instructions/countyCouncilForm.instructions";
 import MayorInstructions from "@/components/instructions/mayorForm.instructions";
 import SubPageHeader from "@/components/shared/subPageHeader";
-import useApiResponse from "@/hooks/zustand/useApiResoponse";
 
-import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { useTheme, Box, Tab, Paper, Grid } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useCallback, useEffect } from "react";
-import { create } from "zustand";
+import { TabContext } from "@mui/lab";
+import { Box, Grid, Paper, useTheme } from "@mui/material";
+import { useRouter } from "next/navigation";
+import React, { useCallback } from "react";
 
 type Props = {};
 const ZadajPytanie = (props: Props) => {

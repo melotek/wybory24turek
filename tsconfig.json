@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "incremental": true,
+
     "paths": {
       "@/*": ["./*"]
     }
@@ -24,6 +25,7 @@
     "**.*.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "next.config.mjs",
     ".next/types/**/*.ts",
     "jest.config.js"
   ],
