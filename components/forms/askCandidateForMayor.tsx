@@ -15,7 +15,7 @@ import MaterialTextInput from "../shared/textField";
 enum FormInputKey {
   firstname = "firstname",
   secondname = "secondname",
-  email = "email",
+  // email = "email",
   //   district= 'district',
   category = "category",
   question = "question",
@@ -24,7 +24,7 @@ enum FormInputKey {
 const formInputLabels = {
   firstname: "Imię",
   secondname: "Nazwisko",
-  email: "Email",
+  // email: "Email",
   category: "Kategoria",
   question: "Pytanie",
 };
@@ -33,7 +33,7 @@ export interface IFormInputs {
   firstname: string;
   secondname: string;
   question: string;
-  email?: string;
+  // email?: string;
   category?: string;
   // Preference: number | '';
 }
@@ -51,7 +51,7 @@ const AskCandidateForMayorForm = () => {
     defaultValues: {
       firstname: "",
       secondname: "",
-      email: "",
+      // email: "",
       category: "",
       question: "",
       // Preference: '',
