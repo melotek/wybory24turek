@@ -1,25 +1,13 @@
 import AskoCandidateToCityForm from "@/components/forms/askCandidateForCityCouncil";
-import AskCandidateToCountyForm from "@/components/forms/askCandidateForCountyCouncil";
-import AskCandidateForMayorForm from "@/components/forms/askCandidateForMayor";
 import TabListComponent from "@/components/forms/tabList";
 import CouncilInstrucitons from "@/components/instructions/cityCouncilForm.instructions";
-import CountyInstrucitons from "@/components/instructions/countyCouncilForm.instructions";
-import MayorInstructions from "@/components/instructions/mayorForm.instructions";
 import CustomModal from "@/components/shared/modal";
 import SubPageHeader from "@/components/shared/subPageHeader";
 import useApiResponse, { State } from "@/hooks/zustand/useApiResoponse";
 
-import { TabContext, TabList, TabPanel } from "@mui/lab";
-import {
-  useTheme,
-  Box,
-  Tab,
-  Paper,
-  Grid,
-  Typography,
-  Breakpoints,
-} from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
+import { TabContext } from "@mui/lab";
+import { Box, Button, Grid, Paper, Typography, useTheme } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect } from "react";
 
 type Props = {};
@@ -63,8 +51,7 @@ const ZadajPytanie = (props: Props) => {
       <SubPageHeader title="Zadaj pytanie przyszłemu radnemu rady gminy" />
 
       <CustomModal
-        // open={response !== null}
-        open={open}
+        open={response !== null}
         onClose={handleClose}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
@@ -84,9 +71,13 @@ const ZadajPytanie = (props: Props) => {
             </Typography>
           </Box>
           <Typography sx={{ marginBottom: 0 }} paragraph id="modal-description">
-            lorem ipsum dolerem
-            {/* {response && response.data.message} */}
+            {response && response.data.message}
           </Typography>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => router.push("/lista-pytan")}
+          ></Button>
         </Paper>
       </CustomModal>
       <TabContext value={value}>
