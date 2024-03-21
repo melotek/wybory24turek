@@ -1,7 +1,9 @@
-import type { NextApiResponse } from "next";
+// @ts-ignore
 import LRUCache from "lru-cache";
+import type { NextApiResponse } from "next";
 // handleRequestCancellation?: () => AbortController
 //
+
 type CancelObject<T> = {
   [P in keyof T]: T[P] & { handleRequestCancellation?: () => AbortController };
 };

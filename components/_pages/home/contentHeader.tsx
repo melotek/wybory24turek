@@ -1,9 +1,9 @@
+import staticImage from "@/public/images/home-header.jpg";
 import { Box, Button, Container, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import TimeCounter from "./timeCounter";
-
 type Props = {};
 
 const ContentHeader = (props: Props) => {
@@ -14,26 +14,24 @@ const ContentHeader = (props: Props) => {
   return (
     <div
       style={{
-        width: `100vw`,
-        height: `100vh`,
+        position: "static",
+        // width: `100vw`,
+        // height: `100vh`,
       }}
     >
       <Image
-        layout="fill"
-        objectFit="cover"
+        // layout="fill"
         ref={ref}
         sizes="100vw"
         style={{
+          width: "100%",
+          height: "100%",
+          // layout: "fill",
+          objectFit: "cover",
           position: "absolute",
           objectPosition: "center top",
-
-          marginLeft: 0,
-          marginRight: 0, // zIndex: 1,
-          top: 0,
-          left: 0,
-          right: 0,
         }}
-        src="/images/home-header.jpg"
+        src={staticImage}
         alt="Kobieta kandydat do organu samorządowe odpowiada na pytania, podczas publicznej debaty"
       />
       <Container
@@ -75,6 +73,10 @@ const ContentHeader = (props: Props) => {
           <Box>
             <TimeCounter />
           </Box>
+          <Typography>
+            Nasza wspólna praca ma sens tylko, jeżeli twoje głosy wylądują w
+            urnie wyborczej
+          </Typography>
         </Box>
         <Typography
           sx={{

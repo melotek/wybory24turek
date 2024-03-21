@@ -21,8 +21,8 @@ export default async function handler(
   res: NextApiResponse<ResponseData>,
 ) {
   await limiter.check(res, 10, "CACHE_TOKEN");
-  await dbConnect();
   if (req.method === "POST") {
+    await dbConnect();
     if (req.body.recipient === "COUNTY_COUNCIL") {
       try {
         await questionCountyCouncil.create<IquestionForms<"COUNTY_COUNCIL">>(

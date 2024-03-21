@@ -1,9 +1,7 @@
-import questionsAPI from "@/actions/questionsApi";
 import { fetcher } from "@/actions/utills";
 import QuestionViewUserPanel from "@/components/_pages/listaPytan/questionViewUserPanel";
 import SubPageHeader from "@/components/shared/subPageHeader";
-import { Box, Container, Paper, Typography, useTheme } from "@mui/material";
-import React from "react";
+import { useTheme } from "@mui/material";
 import useSWR from "swr";
 
 const Index = () => {
