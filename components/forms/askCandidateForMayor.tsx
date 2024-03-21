@@ -1,19 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Controller, FieldError, useForm } from "react-hook-form";
-import { Box, Button, useTheme } from "@mui/material";
-import MaterialTextInput from "../shared/textField";
-import SelectOptions from "../shared/selectOptions"; // Ensure this import path is correct
-import { selectOptions } from "./askCondidate.Core";
-import { ZodError, z } from "zod";
 import questionsAPI from "@/actions/questionsApi";
-import Error from "next/error";
-import { AxiosResponse } from "axios";
 import {
   ErrorResolver,
   ValidationMayorFrom,
   validationMayorFromSchema,
 } from "@/helpers/formValidations";
+import { Box, useTheme } from "@mui/material";
+import { AxiosResponse } from "axios";
+import { useEffect, useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { ZodError } from "zod";
 import MyButton from "../shared/buttons";
+import MaterialTextInput from "../shared/textField";
 
 enum FormInputKey {
   firstname = "firstname",
@@ -75,6 +72,7 @@ const AskCandidateForMayorForm = () => {
   });
 
   const theme = useTheme();
+  /* eslint-disable no-alert, no-console */
   const onSubmit = async (data: IFormInputs) => {
     try {
       const response = await questionsAPI.createMayorquestion(data);
@@ -84,6 +82,8 @@ const AskCandidateForMayorForm = () => {
       console.log(error);
     }
   };
+  /* eslint-enable no-alert */
+
   useEffect(() => {
     onSubmit;
   }, [onSubmit]);

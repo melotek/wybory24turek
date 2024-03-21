@@ -34,9 +34,12 @@ export default async function handler(
 
   if (req.method === "GET") {
     try {
-      const questionsMayor = await questionMayor.find({});
-      const questionsCityCouncil = await questionCityCouncil.find({});
-      const questionsCountyCouncil = await questionCountyCouncil.find({});
+      const [questionsMayor, questionsCityCouncil, questionsCountyCouncil] =
+        await Promise.all([
+          questionMayor.find({}),
+          questionCityCouncil.find({}),
+          questionCountyCouncil.find({}),
+        ]);
       return res.status(200).json({
         questionsMayor: questionsMayor,
         questionsCityCouncil: questionsCityCouncil,

@@ -1,18 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Box, Button, useTheme } from "@mui/material";
-import MaterialTextInput from "../shared/textField";
-import SelectOptions from "../shared/selectOptions"; // Ensure this import path is correct
-import { selectOptions } from "./askCondidate.Core";
 import questionsAPI from "@/actions/questionsApi";
-import { AxiosResponse } from "axios";
 import {
-  validationCityCouncilFromSchema,
   ErrorResolver,
+  validationCityCouncilFromSchema,
 } from "@/helpers/formValidations";
+import useApiResponse from "@/hooks/zustand/useApiResoponse";
+import { Box, useTheme } from "@mui/material";
+import { useEffect, useRef } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { ZodError } from "zod";
 import MyButton from "../shared/buttons";
-import useApiResponse from "@/hooks/zustand/useApiResoponse";
+import SelectOptions from "../shared/selectOptions"; // Ensure this import path is correct
+import MaterialTextInput from "../shared/textField";
+import { selectOptions } from "./askCondidate.Core";
 
 // Define the keys as simple strings to prevent TypeScript issues.
 enum FormInputKey {
@@ -78,6 +77,7 @@ const AskoCandidateToCityForm = () => {
   });
 
   const theme = useTheme();
+  /* eslint-disable no-alert, no-console */
   const onSubmit = async (data: IFormInputs) => {
     try {
       const response = await questionsAPI.createCityCouncilquestion(data);
@@ -86,6 +86,7 @@ const AskoCandidateToCityForm = () => {
       console.log(error);
     }
   };
+  /* eslint-enable no-alert */
 
   useEffect(() => {
     onSubmit;

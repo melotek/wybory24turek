@@ -44,17 +44,21 @@ const HomeContent = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={6} lg={4}>
             <ContentCard>
-              <Typography component="h3" variant="h6" gutterBottom>
+              <Typography component="h3" variant="h5" gutterBottom>
                 Twoje pytania zmieniają debatę!
               </Typography>
               <Image
                 src="/images/interpretations.svg"
                 priority
-                width={280}
-                height={280}
+                width={240}
+                height={240}
                 alt="zadaj pytanie"
               />
-              <Typography paragraph variant="body2">
+              <Typography
+                paragraph
+                variant="body2"
+                lineHeight={theme.spacing(3)}
+              >
                 Wykorzystaj swoją szansę, by wpłynąć na kształt wyborczej
                 dyskusji w Turku. Zadaj pytanie, które leży Ci na sercu, i dodaj
                 do niego swoją sygnaturę. To nie tylko sposób na wyrażenie tego,
@@ -67,16 +71,20 @@ const HomeContent = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={4}>
             <ContentCard>
-              <Typography component="h3" variant="h6" gutterBottom>
+              <Typography component="h3" variant="h5" gutterBottom>
                 Twój głos liczy się!
               </Typography>
               <Image
                 src="/images/intepretations-icon.svg"
-                width={280}
-                height={280}
+                width={240}
+                height={240}
                 alt="zadaj pytanie"
               />
-              <Typography paragraph variant="body2">
+              <Typography
+                paragraph
+                variant="body2"
+                lineHeight={theme.spacing(3)}
+              >
                 Teraz, gdy zgłoszone pytania czekają na Twoją ocenę, masz
                 unikalną okazję, by wpłynąć na wybór tematów, które zostaną
                 poruszone podczas debaty wyborczej. Głosowanie na najlepsze
@@ -90,16 +98,20 @@ const HomeContent = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={4}>
             <ContentCard>
-              <Typography component="h3" variant="h6" gutterBottom>
+              <Typography component="h3" variant="h5" gutterBottom>
                 Podziel się swoim głosem!
               </Typography>
               <Image
                 src="/images/intepretations-icon.svg"
-                width={280}
-                height={280}
+                width={240}
+                height={240}
                 alt="zadaj pytanie"
               />
-              <Typography paragraph variant="body2">
+              <Typography
+                paragraph
+                variant="body2"
+                lineHeight={theme.spacing(3)}
+              >
                 Drogi Kandydacie, zachęcamy Cię do bezpośredniego dialogu z
                 wyborcami poprzez wysyłanie własnych wiadomości głosowych.
                 Odpowiadając głosem na pytania społeczności, możesz nie tylko

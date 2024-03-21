@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: dockerfile
+    environment:
+      BASE_URL: ${BASE_URL}
+      MONGODB_URI: ${MONGODB_URI}
+    env_file:
+      - .env.local
+    volumes:
+      - ./:app
+      - ./:app/public
+    restart: always
+    # command: npm run dev
+    ports:
+      - "3000:3000"

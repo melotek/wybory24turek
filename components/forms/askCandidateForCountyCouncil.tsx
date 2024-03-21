@@ -80,6 +80,7 @@ const AskCandidateToCountyForm = () => {
   });
 
   const theme = useTheme();
+  /* eslint-disable no-alert, no-console */
   const onSubmit = async (data: IFormInputs) => {
     try {
       const response = await questionsAPI.createCountyCouncilquestion(data);
@@ -88,6 +89,7 @@ const AskCandidateToCountyForm = () => {
       console.log(error);
     }
   };
+  /* eslint-enable no-alert */
 
   useEffect(() => {
     onSubmit;

@@ -24,9 +24,9 @@ export default async function handler(
 ) {
   await limiter.check(res, 10, "CACHE_TOKEN");
 
-  await dbConnect();
-
   if (req.method === "POST") {
+    await dbConnect();
+
     if (req.body.recipient !== "MAYOR") {
       return res.status(400).json({
         message: "Pytanie nie jest skierowane do kandydatów na burmistrza",
