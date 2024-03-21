@@ -1,4 +1,5 @@
 import { fetcher } from "@/actions/utills";
+import QuestionViewUserPanel from "@/components/_pages/listaPytan/questionViewUserPanel";
 import SubPageHeader from "@/components/shared/subPageHeader";
 import { useTheme } from "@mui/material";
 import useSWR from "swr";
@@ -17,7 +18,7 @@ const Index = () => {
   return (
     <>
       <SubPageHeader title="Lista pytań" />
-      {/* <QuestionViewUserPanel data={data} /> */}
+      <QuestionViewUserPanel data={data} />
     </>
   );
 };
