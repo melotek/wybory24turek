@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 
 import "@/global.css";
+import { useSession } from "next-auth/react";
 
 import * as React from "react";
 import Head from "next/head";
@@ -12,6 +13,10 @@ import theme from "@/ui/config/theme";
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
+  const { data: session, status } = useSession();
+  if (status === "authenticated") {
+    return <p>Signed in as {session.user.email}</p>;
+  }
   return (
     // <AppCacheProvider {...props}>
     <>

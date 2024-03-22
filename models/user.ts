@@ -1,18 +1,19 @@
 import type { IUser } from "@/types";
-import { Schema, model, Types } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 export const userSchema = new Schema<IUser>({
   firstname: {
     type: String,
-    required: true,
+    required: false,
   },
-  useremail: {
+  secondname: {
     type: String,
-    required: true,
+    required: false,
   },
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -21,7 +22,9 @@ export const userSchema = new Schema<IUser>({
   role: {
     type: String,
     required: true,
+    default: "USER",
   },
 });
-const User = model<IUser>("User", userSchema);
+const User =
+  models.userSchema || model<IUser>("User", userSchema, "uzytkownicy-wyborcy");
 export default User;

@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+import { ReactNode } from "react";
 export interface User {
   firstname: string;
   username: string;
@@ -10,7 +11,7 @@ export interface User {
 
 export interface IUser {
   firstname: string;
-  useremail: string;
+  secondname: string;
   email: string;
   password: string;
   role: "USER" | "ADMIN";
@@ -84,3 +85,4 @@ export interface IOkręgWyborczy {
   zasieg: string;
   liczbaMandatow: number;
 }
+export type PropsWithChildren<P = unknown> = P & { children: ReactNode };
